@@ -12,7 +12,7 @@ public class Helper {
                 text.append(scanner.nextLine());
             }
         }catch (FileNotFoundException e){
-            System.out.println("Fehler gefunden: ");
+            System.out.println("Error found: ");
             e.printStackTrace();
         }catch (Exception e){
             e.printStackTrace();
