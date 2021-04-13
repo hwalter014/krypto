@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.*;
 
 public class Helper {
@@ -19,6 +20,22 @@ public class Helper {
         }
 
         return text.toString();
+    }
+
+    public static void writeText(String text, String filename){
+        try{
+            File ausgabeDatei = new File("text\\" + filename + ".txt");
+            if(!ausgabeDatei.isFile()){
+                ausgabeDatei.createNewFile();
+            }
+            FileWriter ausgabeDateiSchreiben = new FileWriter("text\\" + filename + ".txt");
+            ausgabeDateiSchreiben.write(text);
+            ausgabeDateiSchreiben.close();
+            System.out.println("Erfolgreich geschrieben");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static double round(double number){
