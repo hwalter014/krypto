@@ -21,6 +21,8 @@ public class Praktikum {
 
         //Teilaufgabe b)
 
+        System.out.println(Prak1.koinzidenzindex(chiffrat2, 4));
+
 
     }
 }

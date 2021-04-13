@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,6 +46,27 @@ public class Prak1 {
         return text.toString();
     }
 
+    public static double koinzidenzindex(String chiffrat, int keyLaenge){
+        ArrayList<ArrayList<Character>> koinzidenzArray = new ArrayList<>();
 
+        for(int i = 0; i < keyLaenge; i++){
+            koinzidenzArray.add(new ArrayList<Character>());
+        }
+
+        for(int i = 0; i < chiffrat.length(); i++){
+            if (chiffrat.charAt(i) >= 65 && chiffrat.charAt(i) <= 90){
+                koinzidenzArray.get(i % keyLaenge).add(chiffrat.charAt(i));
+            }
+        }
+        ArrayList<Double> IcArray = new ArrayList<>();
+        for (ArrayList<Character> liste:koinzidenzArray ) {
+            int summe = 0;
+            for(int i = 65; i <= 90; i++){
+                summe += Helper.haeufigkeitCharList(liste, (char) i);
+            }
+            IcArray.add((summe * (summe - 1d))/ (liste.size() * (liste.size() - 1d)));
+        }
+        return Helper.mittelwertList(IcArray);
+    }
 
 }

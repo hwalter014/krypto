@@ -67,6 +67,23 @@ public class Helper {
         return anzeige;
     }
 
+    public static int haeufigkeitCharList(ArrayList<Character> text, char pattern){
+        int anzahl = 0;
+        for (char zeichen :
+                text) {
+            anzahl += zeichen == pattern ? 1 : 0;
+        }
+        return anzahl;
+    }
+
+    public static double mittelwertList(ArrayList<Double> liste){
+        double summe = 0;
+        for (double element :
+                liste) {
+            summe += element;
+        }
+        return summe / liste.size();
+    }
 
     // function to sort hashmap based on values
     public static HashMap<Character, Double> sortByValue(HashMap<Character, Double> hm){
