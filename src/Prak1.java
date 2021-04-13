@@ -1,7 +1,7 @@
 public class Prak1 {
     public static double[] relHaeufigkeit(String chiffrat){
         double[] verteilung = new double[26];
-        double chiffratLaenge = anzahlBuchstaben(chiffrat);
+        double chiffratLaenge = Helper.anzahlBuchstaben(chiffrat);
         for(int i = 0; i < 26; i++){
             int anzahlBuchstabe = 0;
             for (char zeichen :
@@ -14,13 +14,11 @@ public class Prak1 {
         return verteilung;
     }
 
+    public static String decryptChiffrat(String chiffrat){
+        String text = "";
 
-    private static int anzahlBuchstaben(String chiffrat){
-        int anzahl = 0;
-        for (char zeichen :
-                chiffrat.toCharArray()) {
-            anzahl += 65 <= zeichen && zeichen <= 90 ? 1 : 0;
-        }
-        return anzahl;
+
+        return text;
     }
+
 }

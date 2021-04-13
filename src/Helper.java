@@ -25,4 +25,19 @@ public class Helper {
         return Math.round(number * 100.0) / 100.0;
     }
 
+    public static char[] getHaeufigkeitGermanLanguage(){
+        return new char[]{'E', 'N', 'I', 'S', 'R', 'A', 'T', 'D', 'H', 'U', 'L', 'C', 'G', 'M',
+                'O', 'B', 'W', 'F', 'K', 'Z', 'P', 'V', 'J', 'Y', 'X', 'Q'};
+    }
+
+
+    public static int anzahlBuchstaben(String chiffrat){
+        int anzahl = 0;
+        for (char zeichen :
+                chiffrat.toCharArray()) {
+            anzahl += 65 <= zeichen && zeichen <= 90 ? 1 : 0;
+        }
+        return anzahl;
+    }
+
 }
