@@ -9,7 +9,7 @@ public class Helper {
             File myFile = new File("text\\"+ filename + ".txt");
             Scanner scanner = new Scanner(myFile);
             while (scanner.hasNextLine()){
-                text.append(scanner.nextLine() + "\n");
+                text.append(scanner.nextLine()).append("\n");
             }
         }catch (FileNotFoundException e){
             System.out.println("Error found: ");
@@ -45,28 +45,25 @@ public class Helper {
     public static HashMap<Character, Double> sortByValue(HashMap<Character, Double> hm){
         // Creating a list from elements of HashMap
         List<Map.Entry<Character, Double> > list
-                = new LinkedList<Map.Entry<Character, Double> >(
+                = new LinkedList<>(
                 hm.entrySet());
 
         // Sorting the list using Collections.sort() method
         // using Comparator
-        Collections.sort(
-                list,
-                new Comparator<Map.Entry<Character, Double> >() {
-                    public int compare(
-                            //fuer absteigende Sortierung 2, 1
-                            //fuer aufsteigende Sortierung 1, 2
-                            Map.Entry<Character, Double> object2,
-                            Map.Entry<Character, Double> object1)
-                    {
-                        return (object1.getValue())
-                                .compareTo(object2.getValue());
-                    }
-                });
+        list.sort(new Comparator<>() {
+            public int compare(
+                    //fuer absteigende Sortierung 2, 1
+                    //fuer aufsteigende Sortierung 1, 2
+                    Map.Entry<Character, Double> object2,
+                    Map.Entry<Character, Double> object1) {
+                return (object1.getValue())
+                        .compareTo(object2.getValue());
+            }
+        });
 
         // puting the  data from sorted list back to hashmap
         HashMap<Character, Double> result
-                = new LinkedHashMap<Character, Double>();
+                = new LinkedHashMap<>();
         for (Map.Entry<Character, Double> me : list) {
             result.put(me.getKey(), me.getValue());
         }

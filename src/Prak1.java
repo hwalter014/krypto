@@ -18,7 +18,7 @@ public class Prak1 {
     }
 
     public static String decryptChiffrat(String chiffrat){
-        String text = "";
+        StringBuilder text = new StringBuilder();
         HashMap<Character, Double> relHaeufigkeit = relHaeufigkeit(chiffrat);
         Map<Character, Double> map = Helper.sortByValue(relHaeufigkeit);
         HashMap<Character, Character> permutationschiffre = new HashMap<>();
@@ -35,14 +35,14 @@ public class Prak1 {
         for (char zeichen :
                 chiffrat.toCharArray()) {
             if (zeichen >= 65 && zeichen <= 90){
-                text += permutationschiffre.get(zeichen);
+                text.append(permutationschiffre.get(zeichen));
 
             }else{
-                text += zeichen;
+                text.append(zeichen);
             }
         }
 
-        return text;
+        return text.toString();
     }
 
 }
