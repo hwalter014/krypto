@@ -1,5 +1,6 @@
 public class Praktikum {
     public static void main(String[] args) {
-        System.out.println();
+        String chiffrat = Helper.readText("chiffrat");
+        System.out.println(Prak1.relHaeufigkeit(chiffrat));
     }
 }

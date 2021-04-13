@@ -6,7 +6,7 @@ public class Helper {
     public static String readText(String filename){
         StringBuilder text = new StringBuilder();
         try{
-            File myFile = new File("..\\text\\"+ filename + ".txt");
+            File myFile = new File("text\\"+ filename + ".txt");
             Scanner scaner = new Scanner(myFile);
             while (scaner.hasNextLine()){
                 text.append(scaner.nextLine());
@@ -19,6 +19,10 @@ public class Helper {
         }
 
         return text.toString();
+    }
+
+    public static double round(double number){
+        return Math.round(number * 100.0) / 100.0;
     }
 
 }
