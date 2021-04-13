@@ -31,7 +31,7 @@ public class Helper {
             FileWriter ausgabeDateiSchreiben = new FileWriter("text\\" + filename + ".txt");
             ausgabeDateiSchreiben.write(text);
             ausgabeDateiSchreiben.close();
-            System.out.println("Erfolgreich geschrieben");
+            System.out.println("Erfolgreich geschrieben: " + ausgabeDatei.getName());
 
         }catch (Exception e){
             e.printStackTrace();
@@ -55,6 +55,16 @@ public class Helper {
             anzahl += 65 <= zeichen && zeichen <= 90 ? 1 : 0;
         }
         return anzahl;
+    }
+
+    public static String writeRelHaeufigkeit(HashMap<Character, Double> hashMap){
+        String anzeige = "";
+        for (Character zeichen :
+                hashMap.keySet()) {
+            anzeige += zeichen + ": " + hashMap.get(zeichen) + "%";
+
+        }
+        return anzeige;
     }
 
 
