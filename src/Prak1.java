@@ -17,7 +17,7 @@ public class Prak1 {
         return dictHaeufigkeit;
     }
 
-    public static String decryptChiffrat(String chiffrat){
+    public static String decryptChiffratC1(String chiffrat){
         StringBuilder text = new StringBuilder();
         HashMap<Character, Double> relHaeufigkeit = relHaeufigkeit(chiffrat);
         Map<Character, Double> map = Helper.sortByValue(relHaeufigkeit);
@@ -44,5 +44,7 @@ public class Prak1 {
 
         return text.toString();
     }
+
+
 
 }
