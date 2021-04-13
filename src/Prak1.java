@@ -1,6 +1,9 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Prak1 {
-    public static double[] relHaeufigkeit(String chiffrat){
-        double[] verteilung = new double[26];
+    public static HashMap<Character, Double> relHaeufigkeit(String chiffrat){
+        HashMap<Character, Double> dictHaeufigkeit = new HashMap<>();
         double chiffratLaenge = Helper.anzahlBuchstaben(chiffrat);
         for(int i = 0; i < 26; i++){
             int anzahlBuchstabe = 0;
@@ -9,14 +12,35 @@ public class Prak1 {
                 anzahlBuchstabe += zeichen == (i + 65) ? 1:0;
             }
             double verteilungBuchstabe = Helper.round(anzahlBuchstabe / chiffratLaenge * 100);
-            verteilung[i] = verteilungBuchstabe ;
+            dictHaeufigkeit.put((char) (i + 65), verteilungBuchstabe);
         }
-        return verteilung;
+        return dictHaeufigkeit;
     }
 
     public static String decryptChiffrat(String chiffrat){
         String text = "";
+        HashMap<Character, Double> relHaeufigkeit = relHaeufigkeit(chiffrat);
+        Map<Character, Double> map = Helper.sortByValue(relHaeufigkeit);
+        HashMap<Character, Character> permutationschiffre = new HashMap<>();
 
+        char[] buchstaben = Helper.getHaeufigkeitGermanLanguage();
+        int index = 0;
+
+        for (Character key :
+                map.keySet()) {
+            permutationschiffre.put(key, buchstaben[index++]);
+
+        }
+
+        for (char zeichen :
+                chiffrat.toCharArray()) {
+            if (zeichen >= 65 && zeichen <= 90){
+                text += permutationschiffre.get(zeichen);
+
+            }else{
+                text += zeichen;
+            }
+        }
 
         return text;
     }
