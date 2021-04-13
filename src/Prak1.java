@@ -1,6 +1,6 @@
 public class Prak1 {
-    public static String relHaeufigkeit(String chiffrat){
-        String verteilung = "";
+    public static double[] relHaeufigkeit(String chiffrat){
+        double[] verteilung = new double[26];
         double chiffratLaenge = anzahlBuchstaben(chiffrat);
         for(int i = 0; i < 26; i++){
             int anzahlBuchstabe = 0;
@@ -9,7 +9,7 @@ public class Prak1 {
                 anzahlBuchstabe += zeichen == (i + 65) ? 1:0;
             }
             double verteilungBuchstabe = Helper.round(anzahlBuchstabe / chiffratLaenge * 100);
-            verteilung += (char) (i + 65) + ": " + verteilungBuchstabe + " % \n";
+            verteilung[i] = verteilungBuchstabe ;
         }
         return verteilung;
     }
