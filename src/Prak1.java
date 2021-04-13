@@ -8,7 +8,7 @@ public class Prak1 {
                     chiffrat.toCharArray()) {
                 anzahlBuchstabe += zeichen == (i + 65) ? 1:0;
             }
-            double verteilungBuchstabe =Helper.round(anzahlBuchstabe / chiffratLaenge * 100);
+            double verteilungBuchstabe = Helper.round(anzahlBuchstabe / chiffratLaenge * 100);
             verteilung += (char) (i + 65) + ": " + verteilungBuchstabe + " % \n";
         }
         return verteilung;

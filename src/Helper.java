@@ -7,9 +7,9 @@ public class Helper {
         StringBuilder text = new StringBuilder();
         try{
             File myFile = new File("text\\"+ filename + ".txt");
-            Scanner scaner = new Scanner(myFile);
-            while (scaner.hasNextLine()){
-                text.append(scaner.nextLine());
+            Scanner scanner = new Scanner(myFile);
+            while (scanner.hasNextLine()){
+                text.append(scanner.nextLine());
             }
         }catch (FileNotFoundException e){
             System.out.println("Fehler gefunden: ");
