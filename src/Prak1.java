@@ -19,26 +19,41 @@ public class Prak1 {
     }
 
     public static String decryptChiffratC1(String chiffrat){
+        //StringBuilder verwenden, damit .append() Methode funktioniert
         StringBuilder text = new StringBuilder();
+
+        //Haeufigkeitsverteilung des Textes chiffrat ermitteln
         HashMap<Character, Double> relHaeufigkeit = relHaeufigkeit(chiffrat);
+
+        //HashMap nach groesse absteigend sortieren
         Map<Character, Double> map = Helper.sortByValue(relHaeufigkeit);
+
+        //neue Hashmap fuer Buchstabe auf Buchstabe erstellen
         HashMap<Character, Character> permutationschiffre = new HashMap<>();
 
+
+        //Buchstaben nach Haeufigkeit der deutschen Sprache
         char[] buchstaben = Helper.getHaeufigkeitGermanLanguage();
+
+        //Index deklaration, weil for each Loop verwendet wurde
         int index = 0;
 
-        for (Character key :
-                map.keySet()) {
+        //Permutationschiffre befuellen nach Verteilung deutscher Sprache
+        for (Character key : map.keySet()) {
             permutationschiffre.put(key, buchstaben[index++]);
 
         }
 
+        //Text chiffrat auf neue Buchstaben aus permutationschiffre mappen
+        //jedes Zeichen durchlaufen
         for (char zeichen :
                 chiffrat.toCharArray()) {
+            //pruefen, ob das gelesene Zeichen ein Grossbuchstabe ist
             if (zeichen >= 65 && zeichen <= 90){
                 text.append(permutationschiffre.get(zeichen));
 
             }else{
+                //Nicht Buchstaben einfach kopieren
                 text.append(zeichen);
             }
         }
