@@ -61,7 +61,7 @@ public class Helper {
         String anzeige = "";
         for (Character zeichen :
                 hashMap.keySet()) {
-            anzeige += zeichen + ": " + hashMap.get(zeichen) + "%";
+            anzeige += zeichen + ": " + hashMap.get(zeichen) + "%\n";
 
         }
         return anzeige;
