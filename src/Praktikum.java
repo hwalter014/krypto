@@ -7,7 +7,7 @@ public class Praktikum {
 
         //Teilaufgabe a)
 
-        Helper.writeText(Helper.writeRelHaeufigkeit(Prak1.relHaeufigkeit(chiffrat)), "Aufg-1A");
+        Helper.writeText(Helper.writeRelHaeufigkeit(Prak1.relHaeufigkeitMonogramm(chiffrat)), "Aufg-1A");
 
         //Teilaufgabe b)
         Helper.writeText(Prak1.decryptChiffratC1(chiffrat), "Aufg-1B");
@@ -17,7 +17,7 @@ public class Praktikum {
         String chiffrat2 = Helper.readText("chiffrat2");
 
         //Teilaufgabe a)
-        Helper.writeText(Helper.writeRelHaeufigkeit(Prak1.relHaeufigkeit(chiffrat2)), "Aufg-2A");
+        Helper.writeText(Helper.writeRelHaeufigkeit(Prak1.relHaeufigkeitMonogramm(chiffrat2)), "Aufg-2A");
 
         //Teilaufgabe b)
 

@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Prak1 {
-    public static HashMap<Character, Double> relHaeufigkeit(String chiffrat){
+    public static HashMap<Character, Double> relHaeufigkeitMonogramm(String chiffrat){
         HashMap<Character, Double> dictHaeufigkeit = new HashMap<>();
         double chiffratLaenge = Helper.anzahlBuchstaben(chiffrat);
         for(int i = 0; i < 26; i++){
@@ -18,12 +18,34 @@ public class Prak1 {
         return dictHaeufigkeit;
     }
 
+    public static HashMap<String, Double> relHaeufigkeitBigramm(String chiffrat){
+        HashMap<String, Double> bigramme = new HashMap<>();
+        int chiffratLaenge = Helper.anzahlBuchstaben(chiffrat);
+
+        for (int ersterBuchstabe = 65; ersterBuchstabe <= 90; ersterBuchstabe++ ){
+            for (int zweiterBuchstabe = 65; zweiterBuchstabe <= 90; zweiterBuchstabe++){
+
+                int anzahlAuftreten = 0;
+                for (int chiffratIndex = 0; chiffratIndex < chiffrat.length()-1; chiffratIndex++){
+
+                    if ((char) ersterBuchstabe == chiffrat.charAt(chiffratIndex) && (char) zweiterBuchstabe == chiffrat.charAt(chiffratIndex+1)){
+                        anzahlAuftreten++;
+                    }
+                }
+                String bigrammelement = "" + (char) ersterBuchstabe + (char) zweiterBuchstabe;
+                double haeufigkeit = anzahlAuftreten / (double)chiffratLaenge;
+                bigramme.put(bigrammelement, haeufigkeit);
+            }
+        }
+        return bigramme;
+    }
+
     public static String decryptChiffratC1(String chiffrat){
         //StringBuilder verwenden, damit .append() Methode funktioniert
         StringBuilder text = new StringBuilder();
 
         //Haeufigkeitsverteilung des Textes chiffrat ermitteln
-        HashMap<Character, Double> relHaeufigkeit = relHaeufigkeit(chiffrat);
+        HashMap<Character, Double> relHaeufigkeit = relHaeufigkeitMonogramm(chiffrat);
 
         //HashMap nach groesse absteigend sortieren
         Map<Character, Double> map = Helper.sortByValue(relHaeufigkeit);
