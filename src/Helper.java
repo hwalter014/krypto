@@ -47,7 +47,6 @@ public class Helper {
                 'O', 'B', 'W', 'F', 'K', 'Z', 'P', 'V', 'J', 'Y', 'X', 'Q'};
     }
 
-
     public static int anzahlBuchstaben(String chiffrat){
         int anzahl = 0;
         for (char zeichen :

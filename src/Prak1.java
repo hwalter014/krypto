@@ -84,25 +84,35 @@ public class Prak1 {
     }
 
     public static double koinzidenzindex(String chiffrat, int keyLaenge){
+        //doppelte ArrayList fuer unterschiedliche keylaengen
         ArrayList<ArrayList<Character>> koinzidenzArray = new ArrayList<>();
 
+        //keylaenge mal Liste in der Liste einfuegen, umd die Zeichen zuzuordnen
         for(int i = 0; i < keyLaenge; i++){
             koinzidenzArray.add(new ArrayList<Character>());
         }
 
+        //durch das Chiffrat gehen und die Buchstaben den einzelnen Listen zuordnen
         for(int i = 0; i < chiffrat.length(); i++){
             if (chiffrat.charAt(i) >= 65 && chiffrat.charAt(i) <= 90){
                 koinzidenzArray.get(i % keyLaenge).add(chiffrat.charAt(i));
             }
         }
+
+        //Liste erstellen wo die einzelnen Koinzidenzwerte der jeweiligen Listen gespeichert werden sollen
         ArrayList<Double> IcArray = new ArrayList<>();
         for (ArrayList<Character> liste:koinzidenzArray ) {
             int summe = 0;
+            //Loop ueber das Alphabet und Haeufigkeit jedes Buchstaben errechnen
             for(int i = 65; i <= 90; i++){
-                summe += Helper.haeufigkeitCharList(liste, (char) i);
+                //Methode gibt die Anzahl der Auftretungen des Buchstbaben zurück
+                int haeufigkeitBuchstabe = Helper.haeufigkeitCharList(liste, (char) i);
+                summe += haeufigkeitBuchstabe * (haeufigkeitBuchstabe -1 );
             }
-            IcArray.add((summe * (summe - 1d))/ (liste.size() * (liste.size() - 1d)));
+            IcArray.add( (summe )/ (liste.size() * (liste.size() - 1d)));
         }
+
+        //Rueckgabe des Mittelwertes der Koinzidenzwerte
         return Helper.mittelwertList(IcArray);
     }
 

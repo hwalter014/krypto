@@ -20,8 +20,11 @@ public class Praktikum {
         Helper.writeText(Helper.writeRelHaeufigkeit(Prak1.relHaeufigkeitMonogramm(chiffrat2)), "Aufg-2A");
 
         //Teilaufgabe b)
-
+        //geht in die Richtung Koinzidenzindex
+        //Kasiski Test scheint allerdings leichter zu implementieren sein, um die Schluessellaenge zu berechnen
         System.out.println(Prak1.koinzidenzindex(chiffrat2, 4));
+
+        //Teilaufgabe b) Kasiski-Test
 
 
     }
