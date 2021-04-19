@@ -77,6 +77,15 @@ public class Helper {
         return anzahl;
     }
 
+    public static int auftretenStringChar(String text, char pattern){
+        int anzahl = 0;
+        for (char zeichen :
+                text.toCharArray()) {
+            anzahl += pattern == zeichen ? 1 : 0;
+        }
+        return anzahl;
+    }
+
     public static double mittelwertList(ArrayList<Double> liste){
         double summe = 0;
         for (double element :

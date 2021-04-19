@@ -171,6 +171,8 @@ public class Prak1 {
         //Schluessel analyse
         for (char buchstabe = 'A'; buchstabe <= 'Z'; buchstabe++){
 
+            //
+
         }
 
         return schluessel;
