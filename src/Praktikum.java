@@ -27,6 +27,10 @@ public class Praktikum {
         //Teilaufgabe b) Kasiski-Test
         System.out.println(Prak1.kasiskiTest(chiffrat2));
 
+        //Teilaufgabe c)
+        //Berechnung speziellen Koinzidenzindex Mg der Vorlesung
+        //
+
 
     }
 }
