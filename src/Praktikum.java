@@ -22,14 +22,14 @@ public class Praktikum {
         //Teilaufgabe b)
         //geht in die Richtung Koinzidenzindex
         //Kasiski Test scheint allerdings leichter zu implementieren sein, um die Schluessellaenge zu berechnen
-        System.out.println(Prak1.koinzidenzindex(chiffrat2, 4));
+        System.out.println(Prak1.koinzidenzindex(chiffrat2, 10));
 
         //Teilaufgabe b) Kasiski-Test
         System.out.println(Prak1.kasiskiTest(chiffrat2));
 
         //Teilaufgabe c)
         //Berechnung speziellen Koinzidenzindex Mg der Vorlesung
-        //
+
 
 
     }

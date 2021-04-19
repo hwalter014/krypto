@@ -49,6 +49,8 @@ public class Helper {
 
     public static int anzahlBuchstaben(String chiffrat){
         int anzahl = 0;
+        //ueber gesammten Text iterieren
+        //nur Betrachtung der Buchstaben A-Z
         for (char zeichen :
                 chiffrat.toCharArray()) {
             anzahl += 65 <= zeichen && zeichen <= 90 ? 1 : 0;

@@ -83,7 +83,7 @@ public class Prak1 {
         return text.toString();
     }
 
-    public static double koinzidenzindex(String chiffrat, int keyLaenge) {
+    public static ArrayList<ArrayList<Character>> koinzidenzindex(String chiffrat, int keyLaenge) {
         //doppelte ArrayList fuer unterschiedliche keylaengen
         ArrayList<ArrayList<Character>> koinzidenzArray = new ArrayList<>();
 
@@ -99,6 +99,7 @@ public class Prak1 {
             }
         }
 
+        /*
         //Liste erstellen wo die einzelnen Koinzidenzwerte der jeweiligen Listen gespeichert werden sollen
         ArrayList<Double> IcArray = new ArrayList<>();
         for (ArrayList<Character> liste : koinzidenzArray) {
@@ -111,9 +112,8 @@ public class Prak1 {
             }
             IcArray.add((summe) / (liste.size() * (liste.size() - 1d)));
         }
-
-        //Rueckgabe des Mittelwertes der Koinzidenzwerte
-        return Helper.mittelwertList(IcArray);
+         */
+        return koinzidenzArray;
     }
 
     public static double kasiskiTest(String chiffrat) {
@@ -157,12 +157,23 @@ public class Prak1 {
         //ergibt die Schluessellaenge
 
         int summe  = 0;
-        for (String schluesel :
-                abstaendeVorkommen.keySet()) {
+        for (String schluesel : abstaendeVorkommen.keySet()) {
             summe += abstaendeVorkommen.get(schluesel);
         }
         return Helper.round((double) summe / abstaendeVorkommen.size());
 
+    }
+
+    public static String koinzidenzindexSchluessel(String chiffrat){
+        String schluessel = "";
+        ArrayList<ArrayList<Character>> koinzidenzindexe = koinzidenzindex(chiffrat, 10);
+
+        //Schluessel analyse
+        for (char buchstabe = 'A'; buchstabe <= 'Z'; buchstabe++){
+
+        }
+
+        return schluessel;
     }
 
 }
