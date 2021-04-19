@@ -25,6 +25,7 @@ public class Praktikum {
         System.out.println(Prak1.koinzidenzindex(chiffrat2, 4));
 
         //Teilaufgabe b) Kasiski-Test
+        System.out.println(Prak1.kasiskiTest(chiffrat2));
 
 
     }
