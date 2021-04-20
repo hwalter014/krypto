@@ -38,8 +38,14 @@ public class Helper {
         }
     }
 
-    public static double round(double number){
-        return Math.round(number * 100.0) / 100.0;
+    public static double round(double number, int stellen){
+        if(stellen < 0)
+            throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, stellen);
+        number = number * factor;
+        long tmp = Math.round(number);
+        return (double) tmp / factor;
     }
 
     public static HashMap<Character, Double> getWSKGermanLanguage(){

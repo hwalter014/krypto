@@ -12,7 +12,7 @@ public class Prak1 {
                     chiffrat.toCharArray()) {
                 anzahlBuchstabe += zeichen == (i + 65) ? 1 : 0;
             }
-            double verteilungBuchstabe = Helper.round(anzahlBuchstabe / chiffratLaenge * 100);
+            double verteilungBuchstabe = Helper.round(anzahlBuchstabe / chiffratLaenge * 100,2);
             dictHaeufigkeit.put((char) (i + 65), verteilungBuchstabe);
         }
         return dictHaeufigkeit;
@@ -160,13 +160,17 @@ public class Prak1 {
         for (String schluesel : abstaendeVorkommen.keySet()) {
             summe += abstaendeVorkommen.get(schluesel);
         }
-        return Helper.round((double) summe / abstaendeVorkommen.size());
+        return Helper.round((double) summe / abstaendeVorkommen.size(), 2);
 
     }
 
     public static String koinzidenzindexSchluessel(String chiffrat){
         String schluessel = "";
         ArrayList<ArrayList<Character>> koinzidenzindexlisten = koinzidenzindex(chiffrat, 10);
+
+        for(ArrayList<Character> subliste : koinzidenzindexlisten){
+            System.out.println(subliste.toString());
+        }
 
         //Schluessel analyse
         for (char buchstabe = 'A'; buchstabe <= 'Z'; buchstabe++){

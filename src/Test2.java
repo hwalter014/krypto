@@ -26,7 +26,7 @@ public class Test2{
 
 
         for(String key : verteilung.keySet()){
-            double amount = round((verteilung.get(key) / ((double) max_zeichen)), 4);
+            double amount = Helper.round((verteilung.get(key) / ((double) max_zeichen)), 4);
             System.out.println(key + ": " + verteilung.get(key) + " >> " + amount + " %");
             verteilung_prozent.put(key, amount);
             verteilung_prozent_clone.put(key, amount);
@@ -63,9 +63,9 @@ public class Test2{
             }
         }
         ds /= amount;
-        int wortlength = (int) round(ds, 0);
+        int wortlength = (int) Helper.round(ds, 0);
         System.out.println("-----------------------------------------------------");
-        System.out.println("Durchschnitts Abstand: " + ds + ". Gerundet: " + round(ds, 0));
+        System.out.println("Durchschnitts Abstand: " + ds + ". Gerundet: " + Helper.round(ds, 0));
         System.out.println("Schlüssellänge nach Kasiki: " + wortlength);
         System.out.println("-----------------------------------------------------");
         System.out.println("");
@@ -240,15 +240,4 @@ public class Test2{
 
     }
 
-
-
-    public static double round(double value, int places){
-        if(places < 0)
-            throw new IllegalArgumentException();
-
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
-    }
 }

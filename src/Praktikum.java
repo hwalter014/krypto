@@ -29,6 +29,7 @@ public class Praktikum {
 
         //Teilaufgabe c)
         //Berechnung speziellen Koinzidenzindex Mg der Vorlesung
+        Prak1.koinzidenzindexSchluessel(chiffrat2);
 
 
 
