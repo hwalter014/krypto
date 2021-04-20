@@ -25,7 +25,7 @@ public class Praktikum {
         //System.out.println(Prak1.koinzidenzindex(chiffrat2, 10));
 
         //Teilaufgabe b) Kasiski-Test
-        System.out.println(Prak1.kasiskiTest(chiffrat2));
+        System.out.println("Der Schluessel hat: " + Prak1.kasiskiTest(chiffrat2) + " Stellen.");
 
         //Teilaufgabe c)
         //Berechnung speziellen Koinzidenzindex Mg der Vorlesung

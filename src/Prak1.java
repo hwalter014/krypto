@@ -89,7 +89,7 @@ public class Prak1 {
 
         //keylaenge mal Liste in der Liste einfuegen, umd die Zeichen zuzuordnen
         for (int i = 0; i < keyLaenge; i++) {
-            koinzidenzArray.add(new ArrayList<Character>());
+            koinzidenzArray.add(new ArrayList<>());
         }
 
         //durch das Chiffrat gehen und die Buchstaben den einzelnen Listen zuordnen
@@ -98,21 +98,6 @@ public class Prak1 {
                 koinzidenzArray.get(i % keyLaenge).add(chiffrat.charAt(i));
             }
         }
-
-        /*
-        //Liste erstellen wo die einzelnen Koinzidenzwerte der jeweiligen Listen gespeichert werden sollen
-        ArrayList<Double> IcArray = new ArrayList<>();
-        for (ArrayList<Character> liste : koinzidenzArray) {
-            int summe = 0;
-            //Loop ueber das Alphabet und Haeufigkeit jedes Buchstaben errechnen
-            for (int i = 65; i <= 90; i++) {
-                //Methode gibt die Anzahl der Auftretungen des Buchstbaben zurück
-                int haeufigkeitBuchstabe = Helper.haeufigkeitCharList(liste, (char) i);
-                summe += haeufigkeitBuchstabe * (haeufigkeitBuchstabe - 1);
-            }
-            IcArray.add((summe) / (liste.size() * (liste.size() - 1d)));
-        }
-         */
         return koinzidenzArray;
     }
 
@@ -166,8 +151,10 @@ public class Prak1 {
 
     public static String koinzidenzindexSchluessel(String chiffrat){
         String schluessel = "";
-        ArrayList<ArrayList<Character>> koinzidenzindexlisten = koinzidenzindex(chiffrat, 10);
+        int key_laenge = (int) kasiskiTest(chiffrat);
+        ArrayList<ArrayList<Character>> koinzidenzindexlisten = koinzidenzindex(chiffrat, key_laenge);
 
+        //Testweise ausgabe der Koinzidenzindex listen
         for(ArrayList<Character> subliste : koinzidenzindexlisten){
             System.out.println(subliste.toString());
         }
@@ -175,7 +162,6 @@ public class Prak1 {
         //Schluessel analyse
         for (char buchstabe = 'A'; buchstabe <= 'Z'; buchstabe++){
 
-            //
 
         }
 
