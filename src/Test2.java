@@ -73,35 +73,8 @@ public class Test2{
         System.out.println("");
         System.out.println("");
 
-        HashMap<Character, Double> buchstabenhaeufigkeit = new HashMap<>();
+        HashMap<Character, Double> buchstabenhaeufigkeit = Helper.getWSKGermanLanguage();
 
-        buchstabenhaeufigkeit.put('E', 0.1740);
-        buchstabenhaeufigkeit.put('N', 0.0978);
-        buchstabenhaeufigkeit.put('I', 0.0755);
-        buchstabenhaeufigkeit.put('S', 0.0727);
-        buchstabenhaeufigkeit.put('R', 0.07);
-        buchstabenhaeufigkeit.put('A', 0.0651);
-        buchstabenhaeufigkeit.put('T', 0.0615);
-        buchstabenhaeufigkeit.put('D', 0.0508);
-        buchstabenhaeufigkeit.put('H', 0.0476);
-        buchstabenhaeufigkeit.put('U', 0.0435);
-        buchstabenhaeufigkeit.put('L', 0.0344);
-        buchstabenhaeufigkeit.put('C', 0.0306);
-        buchstabenhaeufigkeit.put('G', 0.0301);
-        buchstabenhaeufigkeit.put('M', 0.0253);
-        buchstabenhaeufigkeit.put('O', 0.0251);
-        buchstabenhaeufigkeit.put('B', 0.0189);
-        buchstabenhaeufigkeit.put('W', 0.0189);
-        buchstabenhaeufigkeit.put('F', 0.0166);
-        buchstabenhaeufigkeit.put('K', 0.0121);
-        buchstabenhaeufigkeit.put('Z', 0.0113);
-        buchstabenhaeufigkeit.put('P', 0.0079);
-        buchstabenhaeufigkeit.put('V', 0.0067);
-        buchstabenhaeufigkeit.put('ß', 0.0031);
-        buchstabenhaeufigkeit.put('J', 0.0027);
-        buchstabenhaeufigkeit.put('Y', 0.0004);
-        buchstabenhaeufigkeit.put('X', 0.0003);
-        buchstabenhaeufigkeit.put('Q', 0.0002);
 
 
         String text_copy = text.replace("ä", "").replace(",", "");

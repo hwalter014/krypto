@@ -55,7 +55,7 @@ public class Prak1 {
 
 
         //Buchstaben nach Haeufigkeit der deutschen Sprache
-        char[] buchstaben = Helper.getHaeufigkeitGermanLanguage();
+        Character[] buchstaben = Helper.getWSKGermanLanguage().keySet().toArray(new Character[0]);
 
         //Index deklaration, weil for each Loop verwendet wurde
         int index = 0;
@@ -166,7 +166,7 @@ public class Prak1 {
 
     public static String koinzidenzindexSchluessel(String chiffrat){
         String schluessel = "";
-        ArrayList<ArrayList<Character>> koinzidenzindexe = koinzidenzindex(chiffrat, 10);
+        ArrayList<ArrayList<Character>> koinzidenzindexlisten = koinzidenzindex(chiffrat, 10);
 
         //Schluessel analyse
         for (char buchstabe = 'A'; buchstabe <= 'Z'; buchstabe++){
