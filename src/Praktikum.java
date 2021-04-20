@@ -12,6 +12,15 @@ public class Praktikum {
         //Teilaufgabe b)
         Helper.writeText(Prak1.decryptChiffratC1(chiffrat), "Aufg-1B");
 
+        //Teilaufgabe c)
+        //Der Text stammt vom BSI
+
+        //Teilaufgabe d)
+
+        //Der Schlüssel sieht wie folgt aus
+
+
+
         //Aufgabe 2
 
         String chiffrat2 = Helper.readText("chiffrat2");
@@ -31,7 +40,11 @@ public class Praktikum {
         //Berechnung speziellen Koinzidenzindex Mg der Vorlesung
         Prak1.koinzidenzindexSchluessel(chiffrat2);
 
+        //Teilaufgabe d)
 
+
+        //Teilaufgabe e)
+        //Der Text ist der Songtext von Udo Lindenberg Odysee
 
     }
 }

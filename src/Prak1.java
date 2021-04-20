@@ -12,7 +12,7 @@ public class Prak1 {
                     chiffrat.toCharArray()) {
                 anzahlBuchstabe += zeichen == (i + 65) ? 1 : 0;
             }
-            double verteilungBuchstabe = Helper.round(anzahlBuchstabe / chiffratLaenge * 100,2);
+            double verteilungBuchstabe = Helper.round(anzahlBuchstabe / chiffratLaenge * 100, 2);
             dictHaeufigkeit.put((char) (i + 65), verteilungBuchstabe);
         }
         return dictHaeufigkeit;
@@ -118,7 +118,7 @@ public class Prak1 {
 
                 String aktuellerSchluessel = chiffrat.substring(chiffratIndex, chiffratIndex + schluessellaenge);
 
-                //pruefen ob es Eintrag in kombinationenSubString schon gibt
+                //pruefen ob es den Eintrag in kombinationenSubString schon gibt
                 if (kombinationenSubString.containsKey(aktuellerSchluessel)) {
 
                     //Schluessel aus Hashmap nehmen und Value um 1 inkrementiert neu hinzufügen
@@ -141,7 +141,7 @@ public class Prak1 {
         //aus den abstaenden der Vorkommen den Mittelwert berechenn und diesen runden
         //ergibt die Schluessellaenge
 
-        int summe  = 0;
+        int summe = 0;
         for (String schluesel : abstaendeVorkommen.keySet()) {
             summe += abstaendeVorkommen.get(schluesel);
         }
@@ -149,19 +149,33 @@ public class Prak1 {
 
     }
 
-    public static String koinzidenzindexSchluessel(String chiffrat){
+    public static String koinzidenzindexSchluessel(String chiffrat) {
         String schluessel = "";
+
         int key_laenge = (int) kasiskiTest(chiffrat);
+
         ArrayList<ArrayList<Character>> koinzidenzindexlisten = koinzidenzindex(chiffrat, key_laenge);
 
+        //Hashmap fuer die Mg nach Vorlesung
+        HashMap<Character, Double> MgHashMap = new HashMap<>();
+
         //Testweise ausgabe der Koinzidenzindex listen
-        for(ArrayList<Character> subliste : koinzidenzindexlisten){
-            System.out.println(subliste.toString());
-        }
+        for (ArrayList<Character> subliste : koinzidenzindexlisten) {
+            for (char g = 'A'; g <= 'Z'; g++) {
 
-        //Schluessel analyse
-        for (char buchstabe = 'A'; buchstabe <= 'Z'; buchstabe++){
+                int laengeKoinzidenindexliste = subliste.size();
 
+                double atkuellesMg = 0;
+                for (char i = 'A'; i <= 'Z'; i++){
+                    int fi = Helper.auftretenStringChar(chiffrat, i);
+                    //bei i + g wahrscheinlich noch Modulo über Alphabet ??
+                    double pi = Helper.getWSKGermanLanguage().get( (char) (65 + ((i + g) % 26) ) );
+                    atkuellesMg += pi * fi;
+                }
+                atkuellesMg = atkuellesMg / laengeKoinzidenindexliste;
+
+                MgHashMap.put(g, atkuellesMg);
+            }
 
         }
 
