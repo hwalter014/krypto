@@ -158,44 +158,42 @@ public class Prak1 {
         //Hashmap fuer die Mg nach Vorlesung
         HashMap<Integer, Double> MgHashMap = new HashMap<>();
 
-        HashMap<Character, Character> schluessel = new HashMap<>();
-
-        for (int index = 0; index < key_laenge; index++) {
-            Character HaeufigstesElementIndex = 'A';
-            Character BuchstabeSpracheIndex = 'A';
-            Helper.sortByValue(Helper.getWSKGermanLanguage());//??????
-
-            schluessel.put(HaeufigstesElementIndex, BuchstabeSpracheIndex);
-        }
-
-        String schluesselString = schluessel.values().toString();
-
-        int MGHashIndex = 0;
+        String schluessel = "";
 
         //Testweise Ausgabe der Koinzidenzindex listen
         for (ArrayList<Character> subliste : koinzidenzindexlisten) {
-            double hoechstesMG = 0;
-
-            for (char g = 'A'; g <= 'Z'; g++) {
-
-                double aktuellesMg = 0;
-                int laengeKoinzidenindexliste = subliste.size();
-
-                for (char i = 'A'; i <= 'Z'; i++) {
-
-                    int fi = Helper.auftretenArrayListChar(subliste, (char) (65 + ((i + g)%26)));
-                    double pi = Helper.getWSKGermanLanguage().get(i);
-                    aktuellesMg += pi * fi;
-                }
-                aktuellesMg = aktuellesMg / laengeKoinzidenindexliste;
-                hoechstesMG = aktuellesMg < hoechstesMG ? hoechstesMG : aktuellesMg;
+            double durchschnittKey = 0;
+            HashMap<Character, Integer> buchstabenhaeufigkeit = new HashMap<>();
+            for(char buchstabe = 'A'; buchstabe <= 'Z'; buchstabe++){
+                buchstabenhaeufigkeit.put(buchstabe, Helper.haeufigkeitCharList(subliste, buchstabe));
             }
-                MgHashMap.put(MGHashIndex, hoechstesMG);
-                MGHashIndex++;
 
+            //durchschnitt key ermitteln
+
+            String german = "ENSIRATDHULCGMO";
+
+
+            //SVMVIZHBUEQXLWKBVLBZKVVVAMVQMMMAMSZWZVZMAOMIWSAMWTVAVVQJWAOELVCMLAMQO
+            double abstandssumme = 0;
+
+            for(Character buchstabe : german.toCharArray()){
+                Character maxHashMap_Wert = Helper.getlargestCharacter(buchstabenhaeufigkeit);
+                abstandssumme += buchstabe - maxHashMap_Wert;
+
+                buchstabenhaeufigkeit.remove(maxHashMap_Wert);
+            }
+            durchschnittKey = abstandssumme / german.length();
+
+
+            if(durchschnittKey < 0){
+                durchschnittKey = 26 + durchschnittKey;
+            }
+
+            char key = (char) (65 + (int)durchschnittKey);
+            schluessel += "" + key;
         }
 
-        return MgHashMap.values().toString();
+        return schluessel;
     }
 
 }

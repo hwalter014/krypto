@@ -171,4 +171,17 @@ public class Helper {
         return result;
     }
 
+    public static Character getlargestCharacter(HashMap<Character, Integer> hm){
+        Character maxKey_value = (Character) hm.keySet().toArray()[0];
+        for(Character key : hm.keySet()){
+            //evtl >= mal gucken... ob se alle noch da sind
+            if(hm.get(key) > hm.get(maxKey_value)){
+                maxKey_value = key;
+            }
+        }
+        hm.remove(maxKey_value);
+
+        return maxKey_value;
+    }
+
 }
