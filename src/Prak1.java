@@ -201,11 +201,11 @@ public class Prak1 {
         int blockLaenge = key.length();
         for(int index = 0; index < chiffrat.length(); index++){
             //zum entschluesseln minus rechnen
-            char ZeichenDecrypt = (char) (65 + ((chiffrat.charAt(index)) - key.charAt(index % blockLaenge)));
-            if(ZeichenDecrypt < 0){
-                ZeichenDecrypt += 26;
+            int zeichen = ((chiffrat.charAt(index)) % 65) - (key.charAt(index % blockLaenge) % 65);
+            if(zeichen < 0){
+                zeichen += 26;
             }
-            chiffratDecrypt += "" + ZeichenDecrypt;
+            chiffratDecrypt += "" + (char) (zeichen +65);
         }
         return chiffratDecrypt;
     }

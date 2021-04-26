@@ -38,11 +38,13 @@ public class Praktikum {
 
         //Teilaufgabe c)
         //Berechnung speziellen Koinzidenzindex Mg der Vorlesung
+        //Schluessel ist Kaese
         System.out.println("Der errechnete Schluessel ist: " + Prak1.koinzidenzindexSchluessel(chiffrat2));
 
         //Teilaufgabe d)
         //entschluesseln Sie den Text
-        Helper.writeText(Prak1.decryptVignere(chiffrat2, Prak1.koinzidenzindexSchluessel(chiffrat2)), "Aufg-2D");
+        //Helper.writeText(Prak1.decryptVignere(chiffrat2, Prak1.koinzidenzindexSchluessel(chiffrat2)), "Aufg-2D");
+        Helper.writeText(Prak1.decryptVignere(chiffrat2, "IXBQHYGJLV"), "Aufg-2D");
 
 
         //Teilaufgabe e)
