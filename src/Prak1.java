@@ -196,4 +196,18 @@ public class Prak1 {
         return schluessel;
     }
 
+    public static String decryptVignere(String chiffrat, String key){
+        String chiffratDecrypt = "";
+        int blockLaenge = key.length();
+        for(int index = 0; index < chiffrat.length(); index++){
+            //zum entschluesseln minus rechnen
+            char ZeichenDecrypt = (char) (65 + ((chiffrat.charAt(index)) - key.charAt(index % blockLaenge)));
+            if(ZeichenDecrypt < 0){
+                ZeichenDecrypt += 26;
+            }
+            chiffratDecrypt += "" + ZeichenDecrypt;
+        }
+        return chiffratDecrypt;
+    }
+
 }

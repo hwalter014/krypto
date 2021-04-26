@@ -41,6 +41,8 @@ public class Praktikum {
         System.out.println("Der errechnete Schluessel ist: " + Prak1.koinzidenzindexSchluessel(chiffrat2));
 
         //Teilaufgabe d)
+        //entschluesseln Sie den Text
+        Helper.writeText(Prak1.decryptVignere(chiffrat2, Prak1.koinzidenzindexSchluessel(chiffrat2)), "Aufg-2D");
 
 
         //Teilaufgabe e)
