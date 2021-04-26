@@ -43,8 +43,8 @@ public class Praktikum {
 
         //Teilaufgabe d)
         //entschluesseln Sie den Text
-        //Helper.writeText(Prak1.decryptVignere(chiffrat2, Prak1.koinzidenzindexSchluessel(chiffrat2)), "Aufg-2D");
-        Helper.writeText(Prak1.decryptVignere(chiffrat2, "IXBQHYGJLV"), "Aufg-2D");
+        Helper.writeText(Prak1.decryptVignere(chiffrat2, Prak1.koinzidenzindexSchluessel(chiffrat2)), "Aufg-2D-fehlerhafterKey");
+        //Helper.writeText(Prak1.decryptVignere(chiffrat2, "IXBQHYGJLV"), "Aufg-2D");
 
 
         //Teilaufgabe e)
