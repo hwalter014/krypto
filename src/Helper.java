@@ -122,6 +122,15 @@ public class Helper {
         return anzahl;
     }
 
+    public static int auftretenArrayListChar(ArrayList<Character> text,  char pattern){
+        int anzahl = 0;
+        for (char element :
+                text) {
+            anzahl += pattern == element ? 1 : 0;
+        }
+        return anzahl;
+    }
+
     public static double mittelwertList(ArrayList<Double> liste){
         double summe = 0;
         for (double element :

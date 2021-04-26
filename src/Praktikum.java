@@ -38,13 +38,14 @@ public class Praktikum {
 
         //Teilaufgabe c)
         //Berechnung speziellen Koinzidenzindex Mg der Vorlesung
-        Prak1.koinzidenzindexSchluessel(chiffrat2);
+        System.out.println(Prak1.koinzidenzindexSchluessel(chiffrat2));
 
         //Teilaufgabe d)
 
 
         //Teilaufgabe e)
         //Der Text ist der Songtext von Udo Lindenberg Odysee
+        //Link: https://www.youtube.com/watch?v=XektEKr0EVM
 
     }
 }

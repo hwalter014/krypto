@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -150,36 +151,51 @@ public class Prak1 {
     }
 
     public static String koinzidenzindexSchluessel(String chiffrat) {
-        String schluessel = "";
-
         int key_laenge = (int) kasiskiTest(chiffrat);
 
         ArrayList<ArrayList<Character>> koinzidenzindexlisten = koinzidenzindex(chiffrat, key_laenge);
 
         //Hashmap fuer die Mg nach Vorlesung
-        HashMap<Character, Double> MgHashMap = new HashMap<>();
+        HashMap<Integer, Double> MgHashMap = new HashMap<>();
 
-        //Testweise ausgabe der Koinzidenzindex listen
+        HashMap<Character, Character> schluessel = new HashMap<>();
+
+        for (int index = 0; index < key_laenge; index++) {
+            Character HaeufigstesElementIndex = 'A';
+            Character BuchstabeSpracheIndex = 'A';
+            Helper.sortByValue(Helper.getWSKGermanLanguage());//??????
+
+            schluessel.put(HaeufigstesElementIndex, BuchstabeSpracheIndex);
+        }
+
+        String schluesselString = schluessel.values().toString();
+
+        int MGHashIndex = 0;
+
+        //Testweise Ausgabe der Koinzidenzindex listen
         for (ArrayList<Character> subliste : koinzidenzindexlisten) {
+            double hoechstesMG = 0;
+
             for (char g = 'A'; g <= 'Z'; g++) {
 
+                double aktuellesMg = 0;
                 int laengeKoinzidenindexliste = subliste.size();
 
-                double atkuellesMg = 0;
-                for (char i = 'A'; i <= 'Z'; i++){
-                    int fi = Helper.auftretenStringChar(chiffrat, i);
-                    //bei i + g wahrscheinlich noch Modulo über Alphabet ??
-                    double pi = Helper.getWSKGermanLanguage().get( (char) (65 + ((i + g) % 26) ) );
-                    atkuellesMg += pi * fi;
-                }
-                atkuellesMg = atkuellesMg / laengeKoinzidenindexliste;
+                for (char i = 'A'; i <= 'Z'; i++) {
 
-                MgHashMap.put(g, atkuellesMg);
+                    int fi = Helper.auftretenArrayListChar(subliste, (char) (65 + ((i + g)%26)));
+                    double pi = Helper.getWSKGermanLanguage().get(i);
+                    aktuellesMg += pi * fi;
+                }
+                aktuellesMg = aktuellesMg / laengeKoinzidenindexliste;
+                hoechstesMG = aktuellesMg < hoechstesMG ? hoechstesMG : aktuellesMg;
             }
+                MgHashMap.put(MGHashIndex, hoechstesMG);
+                MGHashIndex++;
 
         }
 
-        return schluessel;
+        return MgHashMap.values().toString();
     }
 
 }
