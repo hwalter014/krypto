@@ -52,6 +52,8 @@ public class Helper {
 
         HashMap<Character, Double> buchstabenhaeufigkeit = new HashMap<>();
 
+        //Reihenfolge und Haeufigkeit der deutschen Sprache
+        //nach Wikipedia
         buchstabenhaeufigkeit.put('E', 0.1740);
         buchstabenhaeufigkeit.put('N', 0.0978);
         buchstabenhaeufigkeit.put('I', 0.0755);
