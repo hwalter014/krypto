@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -151,8 +150,10 @@ public class Prak1 {
     }
 
     public static String koinzidenzindexSchluessel(String chiffrat) {
+        //Laenge des Schluessels ermitteln
         int key_laenge = (int) kasiskiTest(chiffrat);
 
+        //chiffrat in Listen einteilen nach Key Laenge
         ArrayList<ArrayList<Character>> koinzidenzindexlisten = koinzidenzindex(chiffrat, key_laenge);
 
         //Hashmap fuer die Mg nach Vorlesung
@@ -162,34 +163,45 @@ public class Prak1 {
 
         //Testweise Ausgabe der Koinzidenzindex listen
         for (ArrayList<Character> subliste : koinzidenzindexlisten) {
-            double durchschnittKey = 0;
+            double durchschnittKey;
             HashMap<Character, Integer> buchstabenhaeufigkeit = new HashMap<>();
             for(char buchstabe = 'A'; buchstabe <= 'Z'; buchstabe++){
                 buchstabenhaeufigkeit.put(buchstabe, Helper.haeufigkeitCharList(subliste, buchstabe));
             }
 
-            //durchschnitt key ermitteln
-
-            String german = "ENSIRATDHULCGMO";
+            //erste haeufigste Buchstaben der dt. Sprache
+            String german = "ENISRAT";
 
 
             //SVMVIZHBUEQXLWKBVLBZKVVVAMVQMMMAMSZWZVZMAOMIWSAMWTVAVVQJWAOELVCMLAMQO
             double abstandssumme = 0;
 
+            //Den haeufigsten Buchstaben in der Koinzidenzliste jeweils
+            //die haeufigsten Buchstaben der dt. Sprache "zuweisen"
+            //und Differenz berechnen
             for(Character buchstabe : german.toCharArray()){
+                //haeufigsten Buchstaben in der Liste ermitteln
                 Character maxHashMap_Wert = Helper.getlargestCharacter(buchstabenhaeufigkeit);
+
+                //Differenz berechnen
                 abstandssumme += buchstabe - maxHashMap_Wert;
 
+                //aktuell haeufigsten ermittelten Buchstaben entfernen
                 buchstabenhaeufigkeit.remove(maxHashMap_Wert);
             }
+            //Durchschnittliche Differenz fuer
             durchschnittKey = abstandssumme / german.length();
 
 
+            //wenn Abstand negativ, wieder ins Alphabet schieben
             if(durchschnittKey < 0){
                 durchschnittKey = 26 + durchschnittKey;
             }
 
+            //Buchstabe des durchschnit. Key ermitteln
             char key = (char) (65 + (int)durchschnittKey);
+
+            //Schluesselbuchstaben an Schluessel anfuegen
             schluessel += "" + key;
         }
 
@@ -198,15 +210,25 @@ public class Prak1 {
 
     public static String decryptVignere(String chiffrat, String key){
         String chiffratDecrypt = "";
+
+        //aktuelle Blocklaenge ermitteln
         int blockLaenge = key.length();
+
+        //durch chiffrattext iterieren
         for(int index = 0; index < chiffrat.length(); index++){
+
             //zum entschluesseln minus rechnen
+            //zeichendifferenz ermitteln
             int zeichen = ((chiffrat.charAt(index)) % 65) - (key.charAt(index % blockLaenge) % 65);
+
+            //wenn Abstand negativ, wieder ins Alphabet schieben
             if(zeichen < 0){
                 zeichen += 26;
             }
+            //Zeichen in Alphabet schieben
             chiffratDecrypt += "" + (char) (zeichen +65);
         }
+        //entschluesselten Text zurueckgeben
         return chiffratDecrypt;
     }
 
