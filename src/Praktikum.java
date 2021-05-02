@@ -51,5 +51,13 @@ public class Praktikum {
         //Der Text ist der Songtext von Udo Lindenberg Odysee
         //Link: https://www.youtube.com/watch?v=XektEKr0EVM
 
+
+
+        //Praktikum 2
+
+        //Aufgabe C1
+        //Chiffrat in chiffrat.bin mit einem Schluessel von random.dat
+
+
     }
 }
