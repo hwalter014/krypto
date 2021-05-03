@@ -57,7 +57,7 @@ public class Praktikum {
 
         //Aufgabe C1
         //Chiffrat in chiffrat.bin mit einem Schluessel von random.dat
-        Prak2.blark();
+        Prak2.aufgabe1();
 
 
     }

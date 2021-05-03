@@ -1,18 +1,26 @@
 import java.io.*;
 
 public class Prak2 {
-    public static void blark() {
-        DataInputStream dataInputStream;
+    public static void aufgabe1() {
+        DataInputStream chiffratInputStream;
+        DataInputStream randomInputStream;
         String chiffratPath = "text/Praktikum02/chiffrat.bin";
+        String randomPath = "text/Praktikum02/random.dat";
         try {
-            dataInputStream = new DataInputStream(
+            chiffratInputStream = new DataInputStream(
                     new BufferedInputStream(
                             new FileInputStream(chiffratPath)));
-            int current = 0;
-            while (current != -1) {
-                current = dataInputStream.readByte();
-                if (current != -1) {
-                    System.out.print(current + " , ");
+            randomInputStream = new DataInputStream(
+                    new BufferedInputStream(
+                            new FileInputStream(randomPath)));
+            byte currtenRandom = 0;
+            byte currentchiffrat = 0;
+
+            while (currentchiffrat != -1) {
+                currentchiffrat = chiffratInputStream.readByte();
+                if (currentchiffrat != -1) {
+
+                    System.out.print(Integer.toString(currentchiffrat) + " , ");
                 }
             }
 
