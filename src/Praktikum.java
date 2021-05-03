@@ -57,7 +57,9 @@ public class Praktikum {
 
         //Aufgabe C1
         //Chiffrat in chiffrat.bin mit einem Schluessel von random.dat
-        //Prblematik ist in random.dat nur um 1 Bit zu schieben und dabei den Uebertrag zu beachten
+        //Loesung des Problems mit Distinguishing Attack
+        //bekannter Schluesselstrom
+        //unbekannter Plaintext
         Prak2.aufgabe1();
 
 
