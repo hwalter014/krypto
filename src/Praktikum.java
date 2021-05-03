@@ -3,14 +3,14 @@ public class Praktikum {
 
         //Aufgabe C1
 
-        String chiffrat = Helper.readText("chiffrat");
+        //String chiffrat = Helper.readText("chiffrat");
 
         //Teilaufgabe a)
 
-        Helper.writeText(Helper.writeRelHaeufigkeit(Prak1.relHaeufigkeitMonogramm(chiffrat)), "Aufg-1A");
+        //Helper.writeText(Helper.writeRelHaeufigkeit(Prak1.relHaeufigkeitMonogramm(chiffrat)), "Aufg-1A");
 
         //Teilaufgabe b)
-        Helper.writeText(Prak1.decryptChiffratC1(chiffrat), "Aufg-1B");
+        //Helper.writeText(Prak1.decryptChiffratC1(chiffrat), "Aufg-1B");
 
         //Teilaufgabe c)
         //Der Text stammt vom BSI
@@ -23,10 +23,10 @@ public class Praktikum {
 
         //Aufgabe 2
 
-        String chiffrat2 = Helper.readText("chiffrat2");
+        //String chiffrat2 = Helper.readText("chiffrat2");
 
         //Teilaufgabe a)
-        Helper.writeText(Helper.writeRelHaeufigkeit(Prak1.relHaeufigkeitMonogramm(chiffrat2)), "Aufg-2A");
+        //Helper.writeText(Helper.writeRelHaeufigkeit(Prak1.relHaeufigkeitMonogramm(chiffrat2)), "Aufg-2A");
 
         //Teilaufgabe b)
         //geht in die Richtung Koinzidenzindex
@@ -34,17 +34,17 @@ public class Praktikum {
         //System.out.println(Prak1.koinzidenzindex(chiffrat2, 10));
 
         //Teilaufgabe b) Kasiski-Test
-        System.out.println("Der Schluessel hat: " + Prak1.kasiskiTest(chiffrat2) + " Stellen.");
+        //System.out.println("Der Schluessel hat: " + Prak1.kasiskiTest(chiffrat2) + " Stellen.");
 
         //Teilaufgabe c)
         //Berechnung speziellen Koinzidenzindex Mg der Vorlesung
         //Schluessel ist Kaese
-        System.out.println("Der errechnete Schluessel ist: " + Prak1.koinzidenzindexSchluessel(chiffrat2));
+        //System.out.println("Der errechnete Schluessel ist: " + Prak1.koinzidenzindexSchluessel(chiffrat2));
 
         //Teilaufgabe d)
         //entschluesseln Sie den Text
-        Helper.writeText(Prak1.decryptVignere(chiffrat2, Prak1.koinzidenzindexSchluessel(chiffrat2)), "Aufg-2D-fehlerhafterKey");
-        Helper.writeText(Prak1.decryptVignere(chiffrat2, "IXBQHYGJLV"), "Aufg-2D");
+        //Helper.writeText(Prak1.decryptVignere(chiffrat2, Prak1.koinzidenzindexSchluessel(chiffrat2)), "Aufg-2D-fehlerhafterKey");
+        //Helper.writeText(Prak1.decryptVignere(chiffrat2, "IXBQHYGJLV"), "Aufg-2D");
 
 
         //Teilaufgabe e)
@@ -57,6 +57,7 @@ public class Praktikum {
 
         //Aufgabe C1
         //Chiffrat in chiffrat.bin mit einem Schluessel von random.dat
+        Prak2.blark();
 
 
     }
