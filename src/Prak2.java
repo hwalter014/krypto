@@ -3,20 +3,21 @@ import java.util.ArrayList;
 
 public class Prak2 {
     public static void aufgabe1() {
-        DataInputStream chiffratInputStream;
-        DataInputStream randomInputStream;
+
+        byte[] randomInput;
+        byte[] chiffratInput;
+
+        int counterRandom = 0;
         String chiffratPath = "text/Praktikum02/chiffrat.bin";
         String randomPath = "text/Praktikum02/random.dat";
         try {
             //chiffrat Datei oeffnen
-            chiffratInputStream = new DataInputStream(
-                    new BufferedInputStream(
-                            new FileInputStream(chiffratPath)));
+            chiffratInput =  new BufferedInputStream(
+                            new FileInputStream(chiffratPath)).readAllBytes();
 
             //random Datei oeffnen
-            randomInputStream = new DataInputStream(
-                    new BufferedInputStream(
-                            new FileInputStream(randomPath)));
+            randomInput = new BufferedInputStream(
+                            new FileInputStream(randomPath)).readAllBytes();
 
             //Lesevariablen mit Anfangswerten belegen
             byte currtenRandom = 0;
@@ -25,7 +26,7 @@ public class Prak2 {
             boolean foundChar = false;
 
             //Random.dat Datei einfach durchlaufen
-            while (currtenRandom != -1) {
+            for (int i = 0; i < 2_000_000; i++) {
 
                 currtenRandom = randomInputStream.readByte();
 
@@ -61,6 +62,7 @@ public class Prak2 {
         }
     }
 
+    //Methode von Henrik mit Strings
     private static ArrayList<String> tobinary(ArrayList<Integer> array){
         ArrayList<String> chiffrat_binary = new ArrayList<>();
         for(int c : array){// für jede Zahl
