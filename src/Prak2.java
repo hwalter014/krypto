@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class Prak2 {
     public static void aufgabe1() {
@@ -20,13 +21,15 @@ public class Prak2 {
             //Lesevariablen mit Anfangswerten belegen
             byte currtenRandom = 0;
             byte currentchiffrat = 0;
-            byte charDecrypt = 0;
+            byte charDecrypt;
             boolean foundChar = false;
 
             //Random.dat Datei einfach durchlaufen
             while (currtenRandom != -1) {
 
                 currtenRandom = randomInputStream.readByte();
+
+                //Schleife fuer jedes Bit des gelesenen Bytes einfuegen
 
                 //chiffrat Datei durchlaufen
                 while (currentchiffrat != -1) {
@@ -38,7 +41,7 @@ public class Prak2 {
 
                     //zuerst gucken ob es Großbuchstabe ist oder ob es Kleinbuchstabe ist
                     //65 ^= A , 90 ^= Z und 65 ^= a , 90 ^= z
-                    if (charDecrypt >= 65 && charDecrypt <= 90 || charDecrypt >= 97 && charDecrypt <= 122) {
+                    if (charDecrypt >= 'A' && charDecrypt <= 'Z' || charDecrypt >= 'a' && charDecrypt <= 'z') {
                         foundChar = true;
                         System.out.print((char) charDecrypt + " , ");
                     } else {
@@ -47,14 +50,41 @@ public class Prak2 {
                 }
                 if (foundChar) {
                     foundChar = false;
-                    System.out.println("neuer Durchlauf folgt");
+                    System.out.println("neuer Durchlauf folgt!");
                 }
 
             }
 
         } catch (Exception e) {
+            //Fehlerausgabe
             e.printStackTrace();
         }
+    }
+
+    private static ArrayList<String> tobinary(ArrayList<Integer> array){
+        ArrayList<String> chiffrat_binary = new ArrayList<>();
+        for(int c : array){// für jede Zahl
+            String clone = "";
+            String s = Integer.toBinaryString(c) + "";
+            if(s.length() > 8){ // der fall, dass die Zahl länger ist als 8 stellen -> abschneiden
+                for(int i  = 0 ; i < 8 ; i++) {
+                    clone = clone + s.charAt((s.length() -8 + i));
+                }
+            }
+            else if(s.length() == 8) {
+                clone = s;
+            }
+            else{ //der fall, dass die Zahl kleiner ist als 8 -> mit 0 erweitern
+                clone = s;
+                String nullen = "";
+                while(clone.length() < 8) {
+                    clone = "0" + clone;
+                }
+            }
+            chiffrat_binary.add(clone);
+        }
+
+        return chiffrat_binary;
     }
 
 }
