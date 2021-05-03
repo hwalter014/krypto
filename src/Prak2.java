@@ -1,44 +1,38 @@
 import java.io.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Prak2 {
     public static void aufgabe1() {
 
+        //Byte Arrays wo Dateien gespeichert werden sollen
         byte[] randomInput;
         byte[] chiffratInput;
 
-        int counterRandom = 0;
+        //Dateipfade zu chiffrat und Schluesselstrom
         String chiffratPath = "text/Praktikum02/chiffrat.bin";
         String randomPath = "text/Praktikum02/random.dat";
         try {
-            //chiffrat Datei oeffnen
+            //chiffrat Datei oeffnen und lesen
             chiffratInput =  new BufferedInputStream(
                             new FileInputStream(chiffratPath)).readAllBytes();
 
-            //random Datei oeffnen
+            //random Datei oeffnen und lesen
             randomInput = new BufferedInputStream(
                             new FileInputStream(randomPath)).readAllBytes();
 
             //Lesevariablen mit Anfangswerten belegen
-            byte currtenRandom = 0;
-            byte currentchiffrat = 0;
             byte charDecrypt;
             boolean foundChar = false;
 
-            //Random.dat Datei einfach durchlaufen
-            for (int i = 0; i < 2_000_000; i++) {
+            //Durch random iterieren
+            for (byte randomByte :randomInput) {
 
-                currtenRandom = randomInputStream.readByte();
-
-                //Schleife fuer jedes Bit des gelesenen Bytes einfuegen
-
-                //chiffrat Datei durchlaufen
-                while (currentchiffrat != -1) {
-
-                    currentchiffrat = chiffratInputStream.readByte();
+                //durch chiffrat iterieren
+                for (byte chiffratByte :chiffratInput) {
 
                     //Zeichen entschluesseln
-                    charDecrypt = (byte) (currtenRandom ^ currentchiffrat);
+                    charDecrypt = (byte) (randomByte ^ chiffratByte);
 
                     //zuerst gucken ob es Großbuchstabe ist oder ob es Kleinbuchstabe ist
                     //65 ^= A , 90 ^= Z und 65 ^= a , 90 ^= z
@@ -53,9 +47,7 @@ public class Prak2 {
                     foundChar = false;
                     System.out.println("neuer Durchlauf folgt!");
                 }
-
             }
-
         } catch (Exception e) {
             //Fehlerausgabe
             e.printStackTrace();
