@@ -94,7 +94,7 @@ public class Prak2 {
         String chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
         //Vermutung fuer Wort
-        String guess = "KOELN";
+        String guess = "CORONA";
 
         //Feld anlegen wo Text gespeichert werden kann
         int[] xchiff1chiff2 = new int[chiffratLaenge];
