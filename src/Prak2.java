@@ -94,7 +94,7 @@ public class Prak2 {
         String chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
         //Vermutung fuer Wort
-        String guess = "BONN";
+        String guess = "KOELN";
 
         //Feld anlegen wo Text gespeichert werden kann
         int[] xchiff1chiff2 = new int[chiffratLaenge];
@@ -113,63 +113,32 @@ public class Prak2 {
 
         int[][] ergebnisse = new int[3][chiffratLaenge];
 
-        int[] ergebnis1 = new int[chiffratLaenge];
-        int[] ergebnis2 = new int[chiffratLaenge];
-        int[] ergebnis3 = new int[chiffratLaenge];
+        for (int ergeb = 0; ergeb < ergebnisse.length; ergeb++) {
+            System.out.println("\nAusgabe Ergebnis " + (ergeb + 1));
 
-        System.out.println("\nAusgabe Ergebnis 1");
-        for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
+            //XOR Durch das Chiffrat minus Guessed Wort
+            for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
 
-            for (int j = 0; j < guess.length(); j++) {
-                ergebnis1[i + j] = xchiff1chiff2[i + j] ^ guess.charAt(j);
+                for (int j = 0; j < guess.length(); j++) {
+
+                    //je nach Ausgabe Chiffrat auswaehlen
+                    switch (ergeb) {
+                        case 0 -> ergebnisse[ergeb][i + j] = xchiff1chiff2[i + j] ^ guess.charAt(j);
+                        case 1 -> ergebnisse[ergeb][i + j] = xchiff1chiff3[i + j] ^ guess.charAt(j);
+                        case 2 -> ergebnisse[ergeb][i + j] = xchiff2chiff3[i + j] ^ guess.charAt(j);
+                    }
+                }
+
+                //Berechnete Strings ausgeben
+                for (int blark : ergebnisse[ergeb]) {
+                    System.out.print((char) blark + " ");
+                }
+                //Zeilenabsatz einfuegen
+                System.out.print("\n");
+
+                ergebnisse[ergeb] = new int[chiffratLaenge];
             }
-            //Berechnete Strings ausgeben
-            for (int blark : ergebnis1) {
-                System.out.print((char) blark + " ");
-            }
-            //Zeilenabsatz einfuegen
-            System.out.print("\n");
-
-            ergebnis1 = new int[chiffratLaenge];
         }
-
-
-        System.out.println("\nAusgabe Ergebnis 2");
-        for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
-
-            for (int j = 0; j < guess.length(); j++) {
-                ergebnis2[i + j] = xchiff1chiff3[i + j] ^ guess.charAt(j);
-            }
-
-            //Berechnete Strings ausgeben
-            for (int blark : ergebnis2) {
-                System.out.print((char) blark + " ");
-            }
-            //Zeilenabsatz einfuegen
-            System.out.print("\n");
-
-
-            ergebnis2 = new int[chiffratLaenge];
-        }
-
-
-        System.out.println("\nAusgabe Ergebnis 3");
-        for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
-
-            for (int j = 0; j < guess.length(); j++) {
-                ergebnis3[i + j] = xchiff2chiff3[i + j] ^ guess.charAt(j);
-            }
-
-            //Berechnete Strings ausgeben
-            for (int blark : ergebnis3) {
-                System.out.print((char) blark + " ");
-            }
-            //Zeilenabsatz einfuegen
-            System.out.print("\n");
-
-            ergebnis3 = new int[chiffratLaenge];
-        }
-
 
     }
 
