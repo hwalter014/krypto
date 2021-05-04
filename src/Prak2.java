@@ -13,22 +13,22 @@ public class Prak2 {
         String randomPath = "text/Praktikum02/random.dat";
         try {
             //chiffrat Datei oeffnen und lesen
-            chiffratInput =  new BufferedInputStream(
-                            new FileInputStream(chiffratPath)).readAllBytes();
+            chiffratInput = new BufferedInputStream(
+                    new FileInputStream(chiffratPath)).readAllBytes();
 
             //random Datei oeffnen und lesen
             randomInput = new BufferedInputStream(
-                            new FileInputStream(randomPath)).readAllBytes();
+                    new FileInputStream(randomPath)).readAllBytes();
 
             //Lesevariablen mit Anfangswerten belegen
             byte charDecrypt;
             boolean foundChar = false;
 
             //Durch random iterieren
-            for (byte randomByte :randomInput) {
+            for (byte randomByte : randomInput) {
 
                 //durch chiffrat iterieren
-                for (byte chiffratByte :chiffratInput) {
+                for (byte chiffratByte : chiffratInput) {
 
                     //Zeichen entschluesseln
                     charDecrypt = (byte) (randomByte ^ chiffratByte);
@@ -54,23 +54,21 @@ public class Prak2 {
     }
 
     //Methode von Henrik mit Strings
-    private static ArrayList<String> tobinary(ArrayList<Integer> array){
+    private static ArrayList<String> tobinary(ArrayList<Integer> array) {
         ArrayList<String> chiffrat_binary = new ArrayList<>();
-        for(int c : array){// für jede Zahl
+        for (int c : array) {// für jede Zahl
             String clone = "";
             String s = Integer.toBinaryString(c) + "";
-            if(s.length() > 8){ // der fall, dass die Zahl länger ist als 8 stellen -> abschneiden
-                for(int i  = 0 ; i < 8 ; i++) {
-                    clone = clone + s.charAt((s.length() -8 + i));
+            if (s.length() > 8) { // der fall, dass die Zahl länger ist als 8 stellen -> abschneiden
+                for (int i = 0; i < 8; i++) {
+                    clone = clone + s.charAt((s.length() - 8 + i));
                 }
-            }
-            else if(s.length() == 8) {
+            } else if (s.length() == 8) {
                 clone = s;
-            }
-            else{ //der fall, dass die Zahl kleiner ist als 8 -> mit 0 erweitern
+            } else { //der fall, dass die Zahl kleiner ist als 8 -> mit 0 erweitern
                 clone = s;
                 String nullen = "";
-                while(clone.length() < 8) {
+                while (clone.length() < 8) {
                     clone = "0" + clone;
                 }
             }
@@ -80,23 +78,96 @@ public class Prak2 {
         return chiffrat_binary;
     }
 
-    public static void aufgabe2(){
+    public static void aufgabe2() {
+
+        //Vermutung ueber Angriff
+        //https://crypto.stackexchange.com/questions/59/taking-advantage-of-one-time-pad-key-reuse
+        //gute Beschreibung
+        //mal schauen ob die hilft
+
         //abgegriffene Chiffrate
-        String chiffrat1 =  "JKKKPJHKCODRDHDXBEJM";
-        String chiffrat2 =  "FYWHXANMDZMTQQJXQBWD";
-        String chiffrat3 =  "LEJSCWXWVKDVAPWPBXWI";
+
+        final int chiffratLaenge = 20;
+
+        String chiffrat1 = "JKKKPJHKCODRDHDXBEJM";
+        String chiffrat2 = "FYWHXANMDZMTQQJXQBWD";
+        String chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
         //Vermutung fuer Wort
-        String guess = "CORONA";
+        String guess = "DDURSTIG";
 
         //Feld anlegen wo Text gespeichert werden kann
-        int[] xchiff1chiff2 = new int[chiffrat1.length()];
+        int[] xchiff1chiff2 = new int[chiffratLaenge];
+        int[] xchiff1chiff3 = new int[chiffratLaenge];
+        int[] xchiff2chiff3 = new int[chiffratLaenge];
+
 
         //XOR der chiffrate erstellen
-        for (int i = 0; i < xchiff1chiff2.length; i++) {
-            xchiff1chiff2[i] = chiffrat1.getBytes()[i] ^ chiffrat2.getBytes()[i] ^ chiffrat3.getBytes()[i];
-            System.out.println(xchiff1chiff2[i]);
+        for (int i = 0; i < chiffratLaenge; i++) {
+            xchiff1chiff2[i] = chiffrat1.getBytes()[i] ^ chiffrat2.getBytes()[i]; // ^ chiffrat3.getBytes()[i];
+            xchiff1chiff3[i] = chiffrat1.getBytes()[i] ^ chiffrat3.getBytes()[i]; // ^ chiffrat3.getBytes()[i];
+            xchiff2chiff3[i] = chiffrat2.getBytes()[i] ^ chiffrat3.getBytes()[i]; // ^ chiffrat3.getBytes()[i];
         }
+
+        //Durch XOR der Chiffrate gehen minus guess
+
+        int[] ergebnis1 = new int[chiffratLaenge];
+        int[] ergebnis2 = new int[chiffratLaenge];
+        int[] ergebnis3 = new int[chiffratLaenge];
+
+        System.out.println("Ausgabe Ergebnis 1");
+        for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
+
+            for (int j = 0; j < guess.length(); j++) {
+                ergebnis1[i + j] = xchiff1chiff2[i + j] ^ guess.charAt(j);
+            }
+            //Berechnete Strings ausgeben
+            for (int blark : ergebnis1) {
+                System.out.print((char) blark + " ");
+            }
+            //Zeilenabsatz einfuegen
+            System.out.print("\n");
+
+            ergebnis1 = new int[chiffratLaenge];
+        }
+
+
+        System.out.println("Ausgabe Ergebnis 2");
+        for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
+
+            for (int j = 0; j < guess.length(); j++) {
+                ergebnis2[i + j] = xchiff1chiff3[i + j] ^ guess.charAt(j);
+            }
+
+            //Berechnete Strings ausgeben
+            for (int blark : ergebnis2) {
+                System.out.print((char) blark + " ");
+            }
+            //Zeilenabsatz einfuegen
+            System.out.print("\n");
+
+
+            ergebnis2 = new int[chiffratLaenge];
+        }
+
+
+        System.out.println("Ausgabe Ergebnis 3");
+        for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
+
+            for (int j = 0; j < guess.length(); j++) {
+                ergebnis3[i + j] = xchiff2chiff3[i + j] ^ guess.charAt(j);
+            }
+
+            //Berechnete Strings ausgeben
+            for (int blark : ergebnis3) {
+                System.out.print((char) blark + " ");
+            }
+            //Zeilenabsatz einfuegen
+            System.out.print("\n");
+
+            ergebnis3 = new int[chiffratLaenge];
+        }
+
 
     }
 
