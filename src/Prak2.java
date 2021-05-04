@@ -94,7 +94,7 @@ public class Prak2 {
         String chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
         //Vermutung fuer Wort
-        String guess = "DDURSTIG";
+        String guess = "BONN";
 
         //Feld anlegen wo Text gespeichert werden kann
         int[] xchiff1chiff2 = new int[chiffratLaenge];
@@ -104,18 +104,20 @@ public class Prak2 {
 
         //XOR der chiffrate erstellen
         for (int i = 0; i < chiffratLaenge; i++) {
-            xchiff1chiff2[i] = chiffrat1.getBytes()[i] ^ chiffrat2.getBytes()[i]; // ^ chiffrat3.getBytes()[i];
-            xchiff1chiff3[i] = chiffrat1.getBytes()[i] ^ chiffrat3.getBytes()[i]; // ^ chiffrat3.getBytes()[i];
-            xchiff2chiff3[i] = chiffrat2.getBytes()[i] ^ chiffrat3.getBytes()[i]; // ^ chiffrat3.getBytes()[i];
+            xchiff1chiff2[i] = chiffrat1.getBytes()[i] ^ chiffrat2.getBytes()[i];
+            xchiff1chiff3[i] = chiffrat1.getBytes()[i] ^ chiffrat3.getBytes()[i];
+            xchiff2chiff3[i] = chiffrat2.getBytes()[i] ^ chiffrat3.getBytes()[i];
         }
 
         //Durch XOR der Chiffrate gehen minus guess
+
+        int[][] ergebnisse = new int[3][chiffratLaenge];
 
         int[] ergebnis1 = new int[chiffratLaenge];
         int[] ergebnis2 = new int[chiffratLaenge];
         int[] ergebnis3 = new int[chiffratLaenge];
 
-        System.out.println("Ausgabe Ergebnis 1");
+        System.out.println("\nAusgabe Ergebnis 1");
         for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
 
             for (int j = 0; j < guess.length(); j++) {
@@ -132,7 +134,7 @@ public class Prak2 {
         }
 
 
-        System.out.println("Ausgabe Ergebnis 2");
+        System.out.println("\nAusgabe Ergebnis 2");
         for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
 
             for (int j = 0; j < guess.length(); j++) {
@@ -151,7 +153,7 @@ public class Prak2 {
         }
 
 
-        System.out.println("Ausgabe Ergebnis 3");
+        System.out.println("\nAusgabe Ergebnis 3");
         for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
 
             for (int j = 0; j < guess.length(); j++) {
