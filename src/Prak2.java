@@ -1,5 +1,4 @@
 import java.io.*;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Prak2 {
@@ -79,6 +78,26 @@ public class Prak2 {
         }
 
         return chiffrat_binary;
+    }
+
+    public static void aufgabe2(){
+        //abgegriffene Chiffrate
+        String chiffrat1 =  "JKKKPJHKCODRDHDXBEJM";
+        String chiffrat2 =  "FYWHXANMDZMTQQJXQBWD";
+        String chiffrat3 =  "LEJSCWXWVKDVAPWPBXWI";
+
+        //Vermutung fuer Wort
+        String guess = "CORONA";
+
+        //Feld anlegen wo Text gespeichert werden kann
+        int[] xchiff1chiff2 = new int[chiffrat1.length()];
+
+        //XOR der chiffrate erstellen
+        for (int i = 0; i < xchiff1chiff2.length; i++) {
+            xchiff1chiff2[i] = chiffrat1.getBytes()[i] ^ chiffrat2.getBytes()[i] ^ chiffrat3.getBytes()[i];
+            System.out.println(xchiff1chiff2[i]);
+        }
+
     }
 
 }
