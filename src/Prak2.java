@@ -94,7 +94,7 @@ public class Prak2 {
         String chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
         //Vermutung fuer Wort
-        String guess = "CORONA";
+        String guess = "DURST";
 
         //Feld anlegen wo Text gespeichert werden kann
         int[] xchiff1chiff2 = new int[chiffratLaenge];
@@ -117,7 +117,7 @@ public class Prak2 {
             System.out.println("\nAusgabe Ergebnis " + (ergeb + 1));
 
             //XOR Durch das Chiffrat minus Guessed Wort
-            for (int i = 0; i < chiffratLaenge - guess.length(); i++) {
+            for (int i = 0; i <= chiffratLaenge - guess.length(); i++) {
 
                 for (int j = 0; j < guess.length(); j++) {
 
