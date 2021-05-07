@@ -94,7 +94,11 @@ public class Prak2 {
         String chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
         //Vermutung fuer Wort
-        String guess = "DURST";
+        String guess = "CORONAPAN";
+
+
+        System.out.println();
+
 
         //Feld anlegen wo Text gespeichert werden kann
         int[] xchiff1chiff2 = new int[chiffratLaenge];
@@ -104,9 +108,9 @@ public class Prak2 {
 
         //XOR der chiffrate erstellen
         for (int i = 0; i < chiffratLaenge; i++) {
-            xchiff1chiff2[i] = chiffrat1.getBytes()[i] ^ chiffrat2.getBytes()[i];
-            xchiff1chiff3[i] = chiffrat1.getBytes()[i] ^ chiffrat3.getBytes()[i];
-            xchiff2chiff3[i] = chiffrat2.getBytes()[i] ^ chiffrat3.getBytes()[i];
+            xchiff1chiff2[i] = (((chiffrat1.getBytes()[i] ^ chiffrat2.getBytes()[i]) % 26) + 65);
+            xchiff1chiff3[i] = (((chiffrat1.getBytes()[i] ^ chiffrat3.getBytes()[i]) % 26) + 65);
+            xchiff2chiff3[i] = (((chiffrat2.getBytes()[i] ^ chiffrat3.getBytes()[i]) % 26) + 65);
         }
 
         //Durch XOR der Chiffrate gehen minus guess
@@ -123,9 +127,9 @@ public class Prak2 {
 
                     //je nach Ausgabe Chiffrat auswaehlen
                     switch (ergeb) {
-                        case 0 -> ergebnisse[ergeb][i + j] = xchiff1chiff2[i + j] ^ guess.charAt(j);
-                        case 1 -> ergebnisse[ergeb][i + j] = xchiff1chiff3[i + j] ^ guess.charAt(j);
-                        case 2 -> ergebnisse[ergeb][i + j] = xchiff2chiff3[i + j] ^ guess.charAt(j);
+                        case 0 -> ergebnisse[ergeb][i + j] = (((xchiff1chiff2[i + j] ^ guess.charAt(j)) % 26) + 65);
+                        case 1 -> ergebnisse[ergeb][i + j] = (((xchiff1chiff3[i + j] ^ guess.charAt(j)) % 26) + 65);
+                        case 2 -> ergebnisse[ergeb][i + j] = (((xchiff2chiff3[i + j] ^ guess.charAt(j)) % 26) + 65);
                     }
                 }
 
