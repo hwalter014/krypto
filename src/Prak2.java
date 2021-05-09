@@ -159,7 +159,7 @@ public class Prak2 {
             xchiff2chiff3[i] = (((aufg2chiffrat2.getBytes()[i] + aufg2chiffrat3.getBytes()[i]) % 26) + 65);
         }
 
-        //Durch XOR der Chiffrate gehen minus guess
+        //Durch Addition der Chiffrate gehen minus guess
 
         int[][] ergebnisse = new int[3][aufg2chiffratLaenge];
 
