@@ -31,7 +31,7 @@ public class Prak2 {
                     new FileInputStream(randomPath)).readAllBytes();
 
             //Lesevariablen mit Anfangswerten belegen
-            byte charDecrypt;
+            char charDecrypt;
             boolean foundChar = false;
 
             //Durch random iterieren
@@ -41,13 +41,13 @@ public class Prak2 {
                 for (byte chiffratByte : chiffratInput) {
 
                     //Zeichen entschluesseln
-                    charDecrypt = (byte) (((randomByte + chiffratByte) % 26) + 65);
+                    charDecrypt = (char) (((randomByte + chiffratByte) % 26) + 65);
 
                     //zuerst gucken ob es Großbuchstabe ist oder ob es Kleinbuchstabe ist
                     //65 ^= A , 90 ^= Z
                     if ((charDecrypt >= 'A' && charDecrypt <= 'Z')) {
                         foundChar = true;
-                        System.out.print((char) charDecrypt + " , ");
+                        System.out.print(charDecrypt + " , ");
                     } else {
                         break;
                     }
