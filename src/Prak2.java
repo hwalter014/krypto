@@ -2,6 +2,16 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Prak2 {
+
+    private static final int aufg2chiffratLaenge = 20;
+
+    private static String aufg2chiffrat1 = "JKKKPJHKCODRDHDXBEJM";
+    private static String aufg2chiffrat2 = "FYWHXANMDZMTQQJXQBWD";
+    private static String aufg2chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
+
+    //Vermutung fuer Wort
+    private static String guess = "corona";
+
     public static void aufgabe1() {
 
         //Byte Arrays wo Dateien gespeichert werden sollen
@@ -85,39 +95,31 @@ public class Prak2 {
         //gute Beschreibung
         //mal schauen ob die hilft
 
-        //abgegriffene Chiffrate
 
-        final int chiffratLaenge = 20;
 
-        String chiffrat1 = "JKKKPJHKCODRDHDXBEJM";
-        String chiffrat2 = "FYWHXANMDZMTQQJXQBWD";
-        String chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
-
-        //Vermutung fuer Wort
-        String guess = "corona";
 
         //Feld anlegen wo Text gespeichert werden kann
-        int[] xchiff1chiff2 = new int[chiffratLaenge];
-        int[] xchiff1chiff3 = new int[chiffratLaenge];
-        int[] xchiff2chiff3 = new int[chiffratLaenge];
+        int[] xchiff1chiff2 = new int[aufg2chiffratLaenge];
+        int[] xchiff1chiff3 = new int[aufg2chiffratLaenge];
+        int[] xchiff2chiff3 = new int[aufg2chiffratLaenge];
 
 
         //XOR der chiffrate erstellen
-        for (int i = 0; i < chiffratLaenge; i++) {
-            xchiff1chiff2[i] = (((chiffrat1.getBytes()[i] ^ chiffrat2.getBytes()[i]) % 26) + 65);
-            xchiff1chiff3[i] = (((chiffrat1.getBytes()[i] ^ chiffrat3.getBytes()[i]) % 26) + 65);
-            xchiff2chiff3[i] = (((chiffrat2.getBytes()[i] ^ chiffrat3.getBytes()[i]) % 26) + 65);
+        for (int i = 0; i < aufg2chiffratLaenge; i++) {
+            xchiff1chiff2[i] = (((aufg2chiffrat1.getBytes()[i] ^ aufg2chiffrat2.getBytes()[i]) % 26) + 65);
+            xchiff1chiff3[i] = (((aufg2chiffrat1.getBytes()[i] ^ aufg2chiffrat3.getBytes()[i]) % 26) + 65);
+            xchiff2chiff3[i] = (((aufg2chiffrat2.getBytes()[i] ^ aufg2chiffrat3.getBytes()[i]) % 26) + 65);
         }
 
         //Durch XOR der Chiffrate gehen minus guess
 
-        int[][] ergebnisse = new int[3][chiffratLaenge];
+        int[][] ergebnisse = new int[3][aufg2chiffratLaenge];
 
         for (int ergeb = 0; ergeb < ergebnisse.length; ergeb++) {
             System.out.println("\nAusgabe Ergebnis " + (ergeb + 1));
 
             //XOR Durch das Chiffrat minus Guessed Wort
-            for (int i = 0; i <= chiffratLaenge - guess.length(); i++) {
+            for (int i = 0; i <= aufg2chiffratLaenge - guess.length(); i++) {
 
                 for (int j = 0; j < guess.length(); j++) {
 
@@ -136,7 +138,7 @@ public class Prak2 {
                 //Zeilenabsatz einfuegen
                 System.out.print("\n");
 
-                ergebnisse[ergeb] = new int[chiffratLaenge];
+                ergebnisse[ergeb] = new int[aufg2chiffratLaenge];
             }
         }
 
@@ -144,38 +146,30 @@ public class Prak2 {
 
 
     public static void aufgabe2Ansatz2(){
-        final int chiffratLaenge = 20;
-
-        String chiffrat1 = "JKKKPJHKCODRDHDXBEJM";
-        String chiffrat2 = "FYWHXANMDZMTQQJXQBWD";
-        String chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
-
-        //Vermutung fuer Wort
-        String guess = "corona";
 
 
         //Feld anlegen wo Text gespeichert werden kann
-        int[] xchiff1chiff2 = new int[chiffratLaenge];
-        int[] xchiff1chiff3 = new int[chiffratLaenge];
-        int[] xchiff2chiff3 = new int[chiffratLaenge];
+        int[] xchiff1chiff2 = new int[aufg2chiffratLaenge];
+        int[] xchiff1chiff3 = new int[aufg2chiffratLaenge];
+        int[] xchiff2chiff3 = new int[aufg2chiffratLaenge];
 
 
         //Addition MODULO der chiffrate erstellen
-        for (int i = 0; i < chiffratLaenge; i++) {
-            xchiff1chiff2[i] = (((chiffrat1.getBytes()[i] + chiffrat2.getBytes()[i]) % 26) + 65);
-            xchiff1chiff3[i] = (((chiffrat1.getBytes()[i] + chiffrat3.getBytes()[i]) % 26) + 65);
-            xchiff2chiff3[i] = (((chiffrat2.getBytes()[i] + chiffrat3.getBytes()[i]) % 26) + 65);
+        for (int i = 0; i < aufg2chiffratLaenge; i++) {
+            xchiff1chiff2[i] = (((aufg2chiffrat1.getBytes()[i] + aufg2chiffrat2.getBytes()[i]) % 26) + 65);
+            xchiff1chiff3[i] = (((aufg2chiffrat1.getBytes()[i] + aufg2chiffrat3.getBytes()[i]) % 26) + 65);
+            xchiff2chiff3[i] = (((aufg2chiffrat2.getBytes()[i] + aufg2chiffrat3.getBytes()[i]) % 26) + 65);
         }
 
         //Durch XOR der Chiffrate gehen minus guess
 
-        int[][] ergebnisse = new int[3][chiffratLaenge];
+        int[][] ergebnisse = new int[3][aufg2chiffratLaenge];
 
         for (int ergeb = 0; ergeb < ergebnisse.length; ergeb++) {
             System.out.println("\nAusgabe Ergebnis " + (ergeb + 1));
 
             //XOR Durch das Chiffrat minus Guessed Wort
-            for (int i = 0; i <= chiffratLaenge - guess.length(); i++) {
+            for (int i = 0; i <= aufg2chiffratLaenge - guess.length(); i++) {
 
                 for (int j = 0; j < guess.length(); j++) {
 
@@ -194,7 +188,7 @@ public class Prak2 {
                 //Zeilenabsatz einfuegen
                 System.out.print("\n");
 
-                ergebnisse[ergeb] = new int[chiffratLaenge];
+                ergebnisse[ergeb] = new int[aufg2chiffratLaenge];
             }
         }
 
