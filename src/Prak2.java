@@ -94,7 +94,7 @@ public class Prak2 {
         String chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
         //Vermutung fuer Wort
-        String guess = "CORONAPAN";
+        String guess = "corona";
 
 
         System.out.println();
