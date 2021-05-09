@@ -5,12 +5,12 @@ public class Prak2 {
 
     private static final int aufg2chiffratLaenge = 20;
 
-    private static String aufg2chiffrat1 = "JKKKPJHKCODRDHDXBEJM";
-    private static String aufg2chiffrat2 = "FYWHXANMDZMTQQJXQBWD";
-    private static String aufg2chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
+    private static final String aufg2chiffrat1 = "JKKKPJHKCODRDHDXBEJM";
+    private static final String aufg2chiffrat2 = "FYWHXANMDZMTQQJXQBWD";
+    private static final String aufg2chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
     //Vermutung fuer Wort
-    private static String guess = "corona";
+    private static final String guess = "corona";
 
     public static void aufgabe1() {
 
@@ -94,8 +94,6 @@ public class Prak2 {
         //https://crypto.stackexchange.com/questions/59/taking-advantage-of-one-time-pad-key-reuse
         //gute Beschreibung
         //mal schauen ob die hilft
-
-
 
 
         //Feld anlegen wo Text gespeichert werden kann
