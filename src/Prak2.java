@@ -30,31 +30,17 @@ public class Prak2 {
             randomInput = new BufferedInputStream(
                     new FileInputStream(randomPath)).readAllBytes();
 
-            //Lesevariablen mit Anfangswerten belegen
-            char charDecrypt;
-            boolean foundChar = false;
-
             //Durch random iterieren
-            for (byte randomByte : randomInput) {
+            for (int randomChar = 0; randomChar <= (randomInput.length - chiffratInput.length); randomChar++) {
 
+                String decryptChiffrat = "";
                 //durch chiffrat iterieren
-                for (byte chiffratByte : chiffratInput) {
+                for (int chiffratchar = 0; chiffratchar < chiffratInput.length; chiffratchar++) {
+                    decryptChiffrat += (char) (((randomInput[randomChar] + chiffratInput[chiffratchar]) % 26) + 65);
 
-                    //Zeichen entschluesseln
-                    charDecrypt = (char) (((randomByte + chiffratByte) % 26) + 65);
-
-                    //zuerst gucken ob es Großbuchstabe ist oder ob es Kleinbuchstabe ist
-                    //65 ^= A , 90 ^= Z
-                    if ((charDecrypt >= 'A' && charDecrypt <= 'Z')) {
-                        foundChar = true;
-                        System.out.print(charDecrypt + " , ");
-                    } else {
-                        break;
-                    }
                 }
-                if (foundChar) {
-                    foundChar = false;
-                    System.out.println("neuer Durchlauf folgt!");
+                if(decryptChiffrat.contains("THE")){
+                    System.out.println(decryptChiffrat);
                 }
             }
         } catch (Exception e) {

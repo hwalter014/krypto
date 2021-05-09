@@ -65,10 +65,10 @@ public class Praktikum {
 
         //Aufgabe2
         //kurz auskommentieren
-        //Prak2.aufgabe2();
+        Prak2.aufgabe2();
 
         //Aufgabe2 Ansatz 2
-       //Prak2.aufgabe2Ansatz2();
+        Prak2.aufgabe2Ansatz2();
 
 
     }
