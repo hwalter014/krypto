@@ -35,8 +35,8 @@ public class Prak2 {
 
                 String decryptChiffrat = "";
                 //durch chiffrat iterieren
-                for (int chiffratchar = 0; chiffratchar < chiffratInput.length; chiffratchar++) {
-                    decryptChiffrat += (char) (((randomInput[randomChar] + chiffratInput[chiffratchar]) % 26) + 65);
+                for (byte chiffratChar : chiffratInput) {
+                    decryptChiffrat += (char) (((randomInput[randomChar] + chiffratChar) % 26) + 65);
 
                 }
                 if(decryptChiffrat.contains("THE")){
