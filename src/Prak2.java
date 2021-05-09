@@ -147,21 +147,21 @@ public class Prak2 {
 
 
         //Feld anlegen wo Text gespeichert werden kann
-        int[] xchiff1chiff2 = new int[aufg2chiffratLaenge];
-        int[] xchiff1chiff3 = new int[aufg2chiffratLaenge];
-        int[] xchiff2chiff3 = new int[aufg2chiffratLaenge];
+        char[] xchiff1chiff2 = new char[aufg2chiffratLaenge];
+        char[] xchiff1chiff3 = new char[aufg2chiffratLaenge];
+        char[] xchiff2chiff3 = new char[aufg2chiffratLaenge];
 
 
         //Addition MODULO der chiffrate erstellen
         for (int i = 0; i < aufg2chiffratLaenge; i++) {
-            xchiff1chiff2[i] = (((aufg2chiffrat1.getBytes()[i] + aufg2chiffrat2.getBytes()[i]) % 26) + 65);
-            xchiff1chiff3[i] = (((aufg2chiffrat1.getBytes()[i] + aufg2chiffrat3.getBytes()[i]) % 26) + 65);
-            xchiff2chiff3[i] = (((aufg2chiffrat2.getBytes()[i] + aufg2chiffrat3.getBytes()[i]) % 26) + 65);
+            xchiff1chiff2[i] = (char) (((aufg2chiffrat1.getBytes()[i] + aufg2chiffrat2.getBytes()[i]) % 26) + 65);
+            xchiff1chiff3[i] = (char) (((aufg2chiffrat1.getBytes()[i] + aufg2chiffrat3.getBytes()[i]) % 26) + 65);
+            xchiff2chiff3[i] = (char) (((aufg2chiffrat2.getBytes()[i] + aufg2chiffrat3.getBytes()[i]) % 26) + 65);
         }
 
         //Durch Addition der Chiffrate gehen minus guess
 
-        int[][] ergebnisse = new int[3][aufg2chiffratLaenge];
+        char[][] ergebnisse = new char[3][aufg2chiffratLaenge];
 
         for (int ergeb = 0; ergeb < ergebnisse.length; ergeb++) {
             System.out.println("\nAusgabe Ergebnis " + (ergeb + 1));
@@ -173,9 +173,9 @@ public class Prak2 {
 
                     //je nach Ausgabe Chiffrat auswaehlen
                     switch (ergeb) {
-                        case 0 -> ergebnisse[ergeb][i + j] = (((xchiff1chiff2[i + j] + guess.charAt(j)) % 26) + 65);
-                        case 1 -> ergebnisse[ergeb][i + j] = (((xchiff1chiff3[i + j] + guess.charAt(j)) % 26) + 65);
-                        case 2 -> ergebnisse[ergeb][i + j] = (((xchiff2chiff3[i + j] + guess.charAt(j)) % 26) + 65);
+                        case 0 -> ergebnisse[ergeb][i + j] = (char) (((xchiff1chiff2[i + j] + guess.charAt(j)) % 26) + 65);
+                        case 1 -> ergebnisse[ergeb][i + j] = (char) (((xchiff1chiff3[i + j] + guess.charAt(j)) % 26) + 65);
+                        case 2 -> ergebnisse[ergeb][i + j] = (char) (((xchiff2chiff3[i + j] + guess.charAt(j)) % 26) + 65);
                     }
                 }
 
@@ -186,7 +186,7 @@ public class Prak2 {
                 //Zeilenabsatz einfuegen
                 System.out.print("\n");
 
-                ergebnisse[ergeb] = new int[aufg2chiffratLaenge];
+                ergebnisse[ergeb] = new char[aufg2chiffratLaenge];
             }
         }
 
