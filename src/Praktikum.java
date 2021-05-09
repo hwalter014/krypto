@@ -60,7 +60,7 @@ public class Praktikum {
         //Loesung des Problems mit Distinguishing Attack
         //bekannter Schluesselstrom
         //unbekannter Plaintext
-        //Prak2.aufgabe1();
+        Prak2.aufgabe1();
 
 
         //Aufgabe2
@@ -68,7 +68,7 @@ public class Praktikum {
         //Prak2.aufgabe2();
 
         //Aufgabe2 Ansatz 2
-        Prak2.aufgabe2Ansatz2();
+       //Prak2.aufgabe2Ansatz2();
 
 
     }

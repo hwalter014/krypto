@@ -10,7 +10,7 @@ public class Prak2 {
     private static final String aufg2chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
     //Vermutung fuer Wort
-    private static final String guess = "corona";
+    private static final String guess = "CORONA";
 
     public static void aufgabe1() {
 
@@ -41,11 +41,11 @@ public class Prak2 {
                 for (byte chiffratByte : chiffratInput) {
 
                     //Zeichen entschluesseln
-                    charDecrypt = (byte) (randomByte ^ chiffratByte);
+                    charDecrypt = (byte) (((randomByte + chiffratByte) % 26) + 65);
 
                     //zuerst gucken ob es Großbuchstabe ist oder ob es Kleinbuchstabe ist
-                    //65 ^= A , 90 ^= Z und 65 ^= a , 90 ^= z
-                    if (charDecrypt >= 'A' && charDecrypt <= 'Z' || charDecrypt >= 'a' && charDecrypt <= 'z') {
+                    //65 ^= A , 90 ^= Z
+                    if ((charDecrypt >= 'A' && charDecrypt <= 'Z')) {
                         foundChar = true;
                         System.out.print((char) charDecrypt + " , ");
                     } else {
@@ -61,31 +61,6 @@ public class Prak2 {
             //Fehlerausgabe
             e.printStackTrace();
         }
-    }
-
-    //Methode von Henrik mit Strings
-    private static ArrayList<String> tobinary(ArrayList<Integer> array) {
-        ArrayList<String> chiffrat_binary = new ArrayList<>();
-        for (int c : array) {// für jede Zahl
-            String clone = "";
-            String s = Integer.toBinaryString(c) + "";
-            if (s.length() > 8) { // der fall, dass die Zahl länger ist als 8 stellen -> abschneiden
-                for (int i = 0; i < 8; i++) {
-                    clone = clone + s.charAt((s.length() - 8 + i));
-                }
-            } else if (s.length() == 8) {
-                clone = s;
-            } else { //der fall, dass die Zahl kleiner ist als 8 -> mit 0 erweitern
-                clone = s;
-                String nullen = "";
-                while (clone.length() < 8) {
-                    clone = "0" + clone;
-                }
-            }
-            chiffrat_binary.add(clone);
-        }
-
-        return chiffrat_binary;
     }
 
     public static void aufgabe2() {
@@ -144,8 +119,6 @@ public class Prak2 {
 
 
     public static void aufgabe2Ansatz2(){
-
-
         //Feld anlegen wo Text gespeichert werden kann
         char[] xchiff1chiff2 = new char[aufg2chiffratLaenge];
         char[] xchiff1chiff3 = new char[aufg2chiffratLaenge];
