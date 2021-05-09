@@ -96,10 +96,6 @@ public class Prak2 {
         //Vermutung fuer Wort
         String guess = "corona";
 
-
-        System.out.println();
-
-
         //Feld anlegen wo Text gespeichert werden kann
         int[] xchiff1chiff2 = new int[chiffratLaenge];
         int[] xchiff1chiff3 = new int[chiffratLaenge];
@@ -130,6 +126,64 @@ public class Prak2 {
                         case 0 -> ergebnisse[ergeb][i + j] = (((xchiff1chiff2[i + j] ^ guess.charAt(j)) % 26) + 65);
                         case 1 -> ergebnisse[ergeb][i + j] = (((xchiff1chiff3[i + j] ^ guess.charAt(j)) % 26) + 65);
                         case 2 -> ergebnisse[ergeb][i + j] = (((xchiff2chiff3[i + j] ^ guess.charAt(j)) % 26) + 65);
+                    }
+                }
+
+                //Berechnete Strings ausgeben
+                for (int blark : ergebnisse[ergeb]) {
+                    System.out.print((char) blark + " ");
+                }
+                //Zeilenabsatz einfuegen
+                System.out.print("\n");
+
+                ergebnisse[ergeb] = new int[chiffratLaenge];
+            }
+        }
+
+    }
+
+
+    public static void aufgabe2Ansatz2(){
+        final int chiffratLaenge = 20;
+
+        String chiffrat1 = "JKKKPJHKCODRDHDXBEJM";
+        String chiffrat2 = "FYWHXANMDZMTQQJXQBWD";
+        String chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
+
+        //Vermutung fuer Wort
+        String guess = "corona";
+
+
+        //Feld anlegen wo Text gespeichert werden kann
+        int[] xchiff1chiff2 = new int[chiffratLaenge];
+        int[] xchiff1chiff3 = new int[chiffratLaenge];
+        int[] xchiff2chiff3 = new int[chiffratLaenge];
+
+
+        //Addition MODULO der chiffrate erstellen
+        for (int i = 0; i < chiffratLaenge; i++) {
+            xchiff1chiff2[i] = (((chiffrat1.getBytes()[i] + chiffrat2.getBytes()[i]) % 26) + 65);
+            xchiff1chiff3[i] = (((chiffrat1.getBytes()[i] + chiffrat3.getBytes()[i]) % 26) + 65);
+            xchiff2chiff3[i] = (((chiffrat2.getBytes()[i] + chiffrat3.getBytes()[i]) % 26) + 65);
+        }
+
+        //Durch XOR der Chiffrate gehen minus guess
+
+        int[][] ergebnisse = new int[3][chiffratLaenge];
+
+        for (int ergeb = 0; ergeb < ergebnisse.length; ergeb++) {
+            System.out.println("\nAusgabe Ergebnis " + (ergeb + 1));
+
+            //XOR Durch das Chiffrat minus Guessed Wort
+            for (int i = 0; i <= chiffratLaenge - guess.length(); i++) {
+
+                for (int j = 0; j < guess.length(); j++) {
+
+                    //je nach Ausgabe Chiffrat auswaehlen
+                    switch (ergeb) {
+                        case 0 -> ergebnisse[ergeb][i + j] = (((xchiff1chiff2[i + j] + guess.charAt(j)) % 26) + 65);
+                        case 1 -> ergebnisse[ergeb][i + j] = (((xchiff1chiff3[i + j] + guess.charAt(j)) % 26) + 65);
+                        case 2 -> ergebnisse[ergeb][i + j] = (((xchiff2chiff3[i + j] + guess.charAt(j)) % 26) + 65);
                     }
                 }
 
