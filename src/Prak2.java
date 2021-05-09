@@ -39,6 +39,8 @@ public class Prak2 {
                     decryptChiffrat += (char) (((randomInput[randomChar] + chiffratChar) % 26) + 65);
 
                 }
+
+                //Falls ein enlgisches WORT enthalten ist soll das Chiffrat ausgegeben werden
                 if(decryptChiffrat.contains("THE")){
                     System.out.println(decryptChiffrat);
                 }
@@ -126,15 +128,20 @@ public class Prak2 {
             System.out.println("\nAusgabe Ergebnis " + (ergeb + 1));
 
             //XOR Durch das Chiffrat minus Guessed Wort
-            for (int i = 0; i <= aufg2chiffratLaenge - guess.length(); i++) {
+            for (int chiffratIndex = 0; chiffratIndex <= aufg2chiffratLaenge - guess.length(); chiffratIndex++) {
 
-                for (int j = 0; j < guess.length(); j++) {
+                for (int guessIndex = 0; guessIndex < guess.length(); guessIndex++) {
 
                     //je nach Ausgabe Chiffrat auswaehlen
                     switch (ergeb) {
-                        case 0 -> ergebnisse[ergeb][i + j] = (char) (((xchiff1chiff2[i + j] + guess.charAt(j)) % 26) + 65);
-                        case 1 -> ergebnisse[ergeb][i + j] = (char) (((xchiff1chiff3[i + j] + guess.charAt(j)) % 26) + 65);
-                        case 2 -> ergebnisse[ergeb][i + j] = (char) (((xchiff2chiff3[i + j] + guess.charAt(j)) % 26) + 65);
+                        case 0 -> ergebnisse[ergeb][chiffratIndex + guessIndex] = (char)
+                                (((xchiff1chiff2[chiffratIndex + guessIndex] + guess.charAt(guessIndex)) % 26) + 65);
+
+                        case 1 -> ergebnisse[ergeb][chiffratIndex + guessIndex] = (char)
+                                (((xchiff1chiff3[chiffratIndex + guessIndex] + guess.charAt(guessIndex)) % 26) + 65);
+
+                        case 2 -> ergebnisse[ergeb][chiffratIndex + guessIndex] = (char)
+                                (((xchiff2chiff3[chiffratIndex + guessIndex] + guess.charAt(guessIndex)) % 26) + 65);
                     }
                 }
 
