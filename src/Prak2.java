@@ -107,23 +107,23 @@ public class Prak2 {
 
 
     public static void aufgabe2Ansatz2(){
-        char[][] guessedKey = new char[3][guess.length()];
-        for (int chiffrat = 0; chiffrat < guessedKey.length; chiffrat++) {
+        char[] guessedKey = new char[guess.length()];
             for (char guessedKeyIndex = 0; guessedKeyIndex < guess.length(); guessedKeyIndex++) {
-                guessedKey[chiffrat][guessedKeyIndex] = getAdditionsPartner(guess.charAt(guessedKeyIndex), aufg2chiffrat1.charAt(guessedKeyIndex));
+                guessedKey[guessedKeyIndex] = getAdditionsPartner(guess.charAt(guessedKeyIndex), aufg2chiffrat1.charAt(guessedKeyIndex));
             }
-        }
+
 
         for (int i = 0; i < 3; i++) {
-            System.out.println("\nVersuche Chiffrat " + (i+1) + " mit geussed Key zu entschluesseln.\n");
-            for(int chiffratIndex = 0; chiffratIndex < (guessedKey[i].length); chiffratIndex++){
+            System.out.println("Versuche Chiffrat " + (i+1) + " mit geussed Key zu entschluesseln.");
+            for(int chiffratIndex = 0; chiffratIndex < (guessedKey.length); chiffratIndex++){
 
                 switch (i) {
-                    case 0 -> System.out.print(getAdditionsPartner(guessedKey[i][chiffratIndex], aufg2chiffrat1.charAt(chiffratIndex) ));
-                    case 1 -> System.out.print(getAdditionsPartner(guessedKey[i][chiffratIndex], aufg2chiffrat2.charAt(chiffratIndex) ));
-                    case 2 -> System.out.print(getAdditionsPartner(guessedKey[i][chiffratIndex], aufg2chiffrat3.charAt(chiffratIndex) ));
+                    case 0 -> System.out.print(getAdditionsPartner(guessedKey[chiffratIndex], aufg2chiffrat1.charAt(chiffratIndex) ));
+                    case 1 -> System.out.print(getAdditionsPartner(guessedKey[chiffratIndex], aufg2chiffrat2.charAt(chiffratIndex) ));
+                    case 2 -> System.out.print(getAdditionsPartner(guessedKey[chiffratIndex], aufg2chiffrat3.charAt(chiffratIndex) ));
                 }
             }
+            System.out.println("\n");
         }
 
     }
