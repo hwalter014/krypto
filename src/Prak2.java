@@ -41,7 +41,7 @@ public class Prak2 {
                 }
 
                 //Falls ein enlgisches WORT enthalten ist soll das Chiffrat ausgegeben werden
-                if(decryptChiffrat.contains("THE")){
+                if(decryptChiffrat.contains("the") || decryptChiffrat.contains("attack")){
                     System.out.println(decryptChiffrat);
                 }
             }
@@ -112,7 +112,6 @@ public class Prak2 {
                 guessedKey[guessedKeyIndex] = getAdditionsPartner(guess.charAt(guessedKeyIndex), aufg2chiffrat1.charAt(guessedKeyIndex));
             }
 
-
         for (int i = 0; i < 3; i++) {
             System.out.println("Versuche Chiffrat " + (i+1) + " mit geussed Key zu entschluesseln.");
             for(int chiffratIndex = 0; chiffratIndex < (guessedKey.length); chiffratIndex++){
@@ -125,7 +124,6 @@ public class Prak2 {
             }
             System.out.println("\n");
         }
-
     }
 
     private static char  getAdditionsPartner(char klartext, char chiffrat){

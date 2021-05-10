@@ -57,10 +57,10 @@ public class Praktikum {
 
         //Aufgabe C1
         //Chiffrat in chiffrat.bin mit einem Schluessel von random.dat
-        //Loesung des Problems mit Distinguishing Attack
         //bekannter Schluesselstrom
         //unbekannter Plaintext
-        //Prak2.aufgabe1();
+        System.out.println("Ausgabe der Loesung fuer die 1. Aufgabe");
+        Prak2.aufgabe1();
 
 
         //Aufgabe2
@@ -68,6 +68,7 @@ public class Praktikum {
         //Prak2.aufgabe2();
 
         //Aufgabe2 Ansatz 2
+        System.out.println("\nAusgabe der Loesung fuer die 2. Aufgabe");
         Prak2.aufgabe2Ansatz2();
 
 
