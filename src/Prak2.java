@@ -10,7 +10,7 @@ public class Prak2 {
     private static final String aufg2chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
     //Vermutung fuer Wort
-    private static final String guess = "AUSGANGSSPERRE";
+    private static final String guess = "AUSGANGSSPERRENINNRW";
 
     public static void aufgabe1() {
 
@@ -110,8 +110,7 @@ public class Prak2 {
         char[][] guessedKey = new char[3][guess.length()];
         for (int chiffrat = 0; chiffrat < guessedKey.length; chiffrat++) {
             for (char guessedKeyIndex = 0; guessedKeyIndex < guess.length(); guessedKeyIndex++) {
-                guessedKey[chiffrat][guessedKeyIndex] =
-                        getAdditionsPartner(guess.charAt(guessedKeyIndex), aufg2chiffrat1.charAt(guessedKeyIndex));
+                guessedKey[chiffrat][guessedKeyIndex] = getAdditionsPartner(guess.charAt(guessedKeyIndex), aufg2chiffrat1.charAt(guessedKeyIndex));
             }
         }
 
@@ -124,9 +123,7 @@ public class Prak2 {
                     case 1 -> System.out.print(getAdditionsPartner(guessedKey[i][chiffratIndex], aufg2chiffrat2.charAt(chiffratIndex) ));
                     case 2 -> System.out.print(getAdditionsPartner(guessedKey[i][chiffratIndex], aufg2chiffrat3.charAt(chiffratIndex) ));
                 }
-
             }
-            System.out.println();
         }
 
     }
