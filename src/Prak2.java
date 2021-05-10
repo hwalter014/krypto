@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Prak2 {
 
@@ -31,18 +31,21 @@ public class Prak2 {
                     new FileInputStream(randomPath)).readAllBytes();
 
             //Durch random iterieren
-            for (int randomChar = 0; randomChar <= (randomInput.length - chiffratInput.length); randomChar++) {
+            for (int randomChar = 480_000; randomChar < (randomInput.length - chiffratInput.length); randomChar++) {
 
                 String decryptChiffrat = "";
                 //durch chiffrat iterieren
-                for (byte chiffratChar : chiffratInput) {
-                    decryptChiffrat += (char) (((randomInput[randomChar] + chiffratChar) % 26) + 65);
+                for (int chiffratIndex = 0; chiffratIndex < chiffratInput.length; chiffratIndex++) {
+                    decryptChiffrat += (char) (randomInput[randomChar + chiffratIndex] ^ chiffratInput[chiffratIndex]);
 
                 }
 
-                //Falls ein enlgisches WORT enthalten ist soll das Chiffrat ausgegeben werden
-                if(decryptChiffrat.contains("the") || decryptChiffrat.contains("attack")){
+                //Falls ein englisches WORT enthalten ist, soll das Chiffrat ausgegeben werden
+                if (decryptChiffrat.contains("the") && decryptChiffrat.contains("of") && decryptChiffrat.contains("is")) {
+                    System.out.println("Key beginnt an Stelle " + randomChar);
+
                     System.out.println(decryptChiffrat);
+                    break;
                 }
             }
         } catch (Exception e) {
@@ -106,24 +109,43 @@ public class Prak2 {
     }
 
 
-    public static void aufgabe2Ansatz2(){
-        char[] guessedKey = new char[guess.length()];
+    public static void aufgabe2Ansatz2() {
+        char[][] guessedKey = new char[3][guess.length()];
+        for (int chiffrat = 0; chiffrat < guessedKey.length; chiffrat++) {
             for (char guessedKeyIndex = 0; guessedKeyIndex < guess.length(); guessedKeyIndex++) {
-                guessedKey[guessedKeyIndex] = getAdditionsPartner(guess.charAt(guessedKeyIndex), aufg2chiffrat1.charAt(guessedKeyIndex));
+                switch (chiffrat) {
+                    case 0 -> guessedKey[chiffrat][guessedKeyIndex] =
+                            getAdditionsPartner(guess.charAt(guessedKeyIndex), aufg2chiffrat1.charAt(guessedKeyIndex));
+                    case 1 -> guessedKey[chiffrat][guessedKeyIndex] =
+                            getAdditionsPartner(guess.charAt(guessedKeyIndex), aufg2chiffrat2.charAt(guessedKeyIndex));
+                    case 2 -> guessedKey[chiffrat][guessedKeyIndex] =
+                            getAdditionsPartner(guess.charAt(guessedKeyIndex), aufg2chiffrat3.charAt(guessedKeyIndex));
+                }
+
             }
+        }
 
-        for (int i = 0; i < 3; i++) {
-            System.out.println("Versuche Chiffrat " + (i+1) + " mit geussed Key zu entschluesseln.");
-            for(int chiffratIndex = 0; chiffratIndex < (guessedKey.length); chiffratIndex++){
+        for (int versuchKey = 0; versuchKey < guessedKey.length; versuchKey++) {
 
-                switch (i) {
-                    case 0 -> System.out.print(getAdditionsPartner(guessedKey[chiffratIndex], aufg2chiffrat1.charAt(chiffratIndex) ));
-                    case 1 -> System.out.print(getAdditionsPartner(guessedKey[chiffratIndex], aufg2chiffrat2.charAt(chiffratIndex) ));
-                    case 2 -> System.out.print(getAdditionsPartner(guessedKey[chiffratIndex], aufg2chiffrat3.charAt(chiffratIndex) ));
+            System.out.println("\nVersuch mit dem Key abgeleitet aus Chiffrat " + (versuchKey + 1) + " zu entschluesseln.");
+
+            System.out.println("Der Key der Versucht wird sieht folgendermaßen aus: ");
+            System.out.println(Arrays.toString(guessedKey[versuchKey]));
+
+            for (int i = 0; i < 3; i++) {
+                System.out.println("\nVersuche Chiffrat " + (i + 1) + " mit guessed Key zu entschluesseln.\n");
+                for (int chiffratIndex = 0; chiffratIndex < (guessedKey[i].length); chiffratIndex++) {
+
+                    switch (i) {
+                        case 0 -> System.out.print(getAdditionsPartner(guessedKey[versuchKey][chiffratIndex], aufg2chiffrat1.charAt(chiffratIndex)));
+                        case 1 -> System.out.print(getAdditionsPartner(guessedKey[versuchKey][chiffratIndex], aufg2chiffrat2.charAt(chiffratIndex)));
+                        case 2 -> System.out.print(getAdditionsPartner(guessedKey[versuchKey][chiffratIndex], aufg2chiffrat3.charAt(chiffratIndex)));
+                    }
                 }
             }
-            System.out.println("\n");
+            System.out.println("\n--------------------------------------");
         }
+
     }
 
     private static char  getAdditionsPartner(char klartext, char chiffrat){
@@ -135,5 +157,4 @@ public class Prak2 {
         }
         return (char) (key + 65);
     }
-
 }
