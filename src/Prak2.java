@@ -31,6 +31,7 @@ public class Prak2 {
                     new FileInputStream(randomPath)).readAllBytes();
 
             //Durch random iterieren
+            //Startwert angepasst, damit man das schneller zeigen kann
             for (int randomChar = 480_000; randomChar < (randomInput.length - chiffratInput.length); randomChar++) {
 
                 String decryptChiffrat = "";
@@ -42,8 +43,7 @@ public class Prak2 {
 
                 //Falls ein englisches WORT enthalten ist, soll das Chiffrat ausgegeben werden
                 if (decryptChiffrat.contains("the") && decryptChiffrat.contains("of") && decryptChiffrat.contains("is")) {
-                    System.out.println("Key beginnt an Stelle " + randomChar);
-
+                    System.out.println("Key beginnt an Stelle: " + randomChar);
                     System.out.println(decryptChiffrat);
                     break;
                 }
@@ -149,8 +149,8 @@ public class Prak2 {
     }
 
     private static char  getAdditionsPartner(char klartext, char chiffrat){
-        int a = klartext % 65; // 0
-        int r = chiffrat % 65;// 2
+        int a = klartext % 65;
+        int r = chiffrat % 65;
         int key = r - a;
         if(key < 0){
             key = 26 + key;
