@@ -10,7 +10,7 @@ public class Prak2 {
     private static final String aufg2chiffrat3 = "LEJSCWXWVKDVAPWPBXWI";
 
     //Vermutung fuer Wort
-    private static final String guess = "CORONA";
+    private static final String guess = "AUSGANGSSPERRE";
 
     public static void aufgabe1() {
 
@@ -107,55 +107,38 @@ public class Prak2 {
 
 
     public static void aufgabe2Ansatz2(){
-        //Feld anlegen wo Text gespeichert werden kann
-        char[] xchiff1chiff2 = new char[aufg2chiffratLaenge];
-        char[] xchiff1chiff3 = new char[aufg2chiffratLaenge];
-        char[] xchiff2chiff3 = new char[aufg2chiffratLaenge];
-
-
-        //Addition MODULO der chiffrate erstellen
-        for (int i = 0; i < aufg2chiffratLaenge; i++) {
-            xchiff1chiff2[i] = (char) (((aufg2chiffrat1.getBytes()[i] + aufg2chiffrat2.getBytes()[i]) % 26) + 65);
-            xchiff1chiff3[i] = (char) (((aufg2chiffrat1.getBytes()[i] + aufg2chiffrat3.getBytes()[i]) % 26) + 65);
-            xchiff2chiff3[i] = (char) (((aufg2chiffrat2.getBytes()[i] + aufg2chiffrat3.getBytes()[i]) % 26) + 65);
-        }
-
-        //Durch Addition der Chiffrate gehen minus guess
-
-        char[][] ergebnisse = new char[3][aufg2chiffratLaenge];
-
-        for (int ergeb = 0; ergeb < ergebnisse.length; ergeb++) {
-            System.out.println("\nAusgabe Ergebnis " + (ergeb + 1));
-
-            //XOR Durch das Chiffrat minus Guessed Wort
-            for (int chiffratIndex = 0; chiffratIndex <= aufg2chiffratLaenge - guess.length(); chiffratIndex++) {
-
-                for (int guessIndex = 0; guessIndex < guess.length(); guessIndex++) {
-
-                    //je nach Ausgabe Chiffrat auswaehlen
-                    switch (ergeb) {
-                        case 0 -> ergebnisse[ergeb][chiffratIndex + guessIndex] = (char)
-                                (((xchiff1chiff2[chiffratIndex + guessIndex] + guess.charAt(guessIndex)) % 26) + 65);
-
-                        case 1 -> ergebnisse[ergeb][chiffratIndex + guessIndex] = (char)
-                                (((xchiff1chiff3[chiffratIndex + guessIndex] + guess.charAt(guessIndex)) % 26) + 65);
-
-                        case 2 -> ergebnisse[ergeb][chiffratIndex + guessIndex] = (char)
-                                (((xchiff2chiff3[chiffratIndex + guessIndex] + guess.charAt(guessIndex)) % 26) + 65);
-                    }
-                }
-
-                //Berechnete Strings ausgeben
-                for (int blark : ergebnisse[ergeb]) {
-                    System.out.print((char) blark + " ");
-                }
-                //Zeilenabsatz einfuegen
-                System.out.print("\n");
-
-                ergebnisse[ergeb] = new char[aufg2chiffratLaenge];
+        char[][] guessedKey = new char[3][guess.length()];
+        for (int chiffrat = 0; chiffrat < guessedKey.length; chiffrat++) {
+            for (char guessedKeyIndex = 0; guessedKeyIndex < guess.length(); guessedKeyIndex++) {
+                guessedKey[chiffrat][guessedKeyIndex] =
+                        getAdditionsPartner(guess.charAt(guessedKeyIndex), aufg2chiffrat1.charAt(guessedKeyIndex));
             }
         }
 
+        for (int i = 0; i < 3; i++) {
+            System.out.println("\nVersuche Chiffrat " + (i+1) + " mit geussed Key zu entschluesseln.\n");
+            for(int chiffratIndex = 0; chiffratIndex < (guessedKey[i].length); chiffratIndex++){
+
+                switch (i) {
+                    case 0 -> System.out.print(getAdditionsPartner(guessedKey[i][chiffratIndex], aufg2chiffrat1.charAt(chiffratIndex) ));
+                    case 1 -> System.out.print(getAdditionsPartner(guessedKey[i][chiffratIndex], aufg2chiffrat2.charAt(chiffratIndex) ));
+                    case 2 -> System.out.print(getAdditionsPartner(guessedKey[i][chiffratIndex], aufg2chiffrat3.charAt(chiffratIndex) ));
+                }
+
+            }
+            System.out.println();
+        }
+
+    }
+
+    private static char  getAdditionsPartner(char klartext, char chiffrat){
+        int a = klartext % 65; // 0
+        int r = chiffrat % 65;// 2
+        int key = r - a;
+        if(key < 0){
+            key = 26 + key;
+        }
+        return (char) (key + 65);
     }
 
 }
