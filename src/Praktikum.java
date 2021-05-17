@@ -72,5 +72,10 @@ public class Praktikum {
         Prak2.aufgabe2Ansatz2();
 
 
+        //Aufgabe3
+        //Aufgabe1
+
+
+
     }
 }
