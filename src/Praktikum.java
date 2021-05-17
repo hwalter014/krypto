@@ -74,6 +74,7 @@ public class Praktikum {
 
         //Aufgabe3
         //Aufgabe1
+        System.out.println(Prak3.checkLFSR(0x1FFFFF));
 
 
 
