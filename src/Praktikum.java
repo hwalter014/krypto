@@ -81,7 +81,7 @@ public class Praktikum {
         //Wiederholung nach 2097151 Iterationen
 
         //Aufgabe 2
-
+        Prak3.aufgabe2();
 
 
     }

@@ -72,4 +72,6 @@ public class Prak3 {
         }
         return lfsr;
     }
+
+    public static void aufgabe2(){}
 }
