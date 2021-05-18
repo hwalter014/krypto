@@ -5,6 +5,9 @@ public class Prak3 {
     public static void checkLFSR(int initialwert){
         int[] lfsr = new int[21];
 
+        String referenzAusgabe = "1111111111111111111110011001100110011001101001011010010110100100";
+        String eigeneAusgabe = "";
+
         //initialwert belegen
         int counter = 0;
         while(initialwert > 0){
@@ -18,8 +21,7 @@ public class Prak3 {
         while(counter < 64){
 
             //Ausgabe
-            int tmpAusgabe = lfsr[0];
-            System.out.print(tmpAusgabe);
+            eigeneAusgabe += String.valueOf(lfsr[0]);
 
             //Berechnung neues Bit
             //Indizes lustig umrechnen wegen komischer Zaehlung
@@ -31,5 +33,9 @@ public class Prak3 {
             lfsr[lfsr.length-1] = nextBit;
             counter++;
         }
+        String vergleich = referenzAusgabe.equals(eigeneAusgabe) ? "" : "nicht ";
+        System.out.println("Die Ausgaben sind " + vergleich + "identisch");
+        System.out.println("Ausgabe ist: ");
+        System.out.println(eigeneAusgabe);
     }
 }
