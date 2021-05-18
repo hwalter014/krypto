@@ -73,9 +73,11 @@ public class Praktikum {
 
 
         //Aufgabe3
-        //Aufgabe1
+        //Aufgabe1 a)
         Prak3.checkLFSR(0x1FFFFF);
 
+        //Aufgabe2 b)
+        System.out.println(Prak3.maxPeriode());
 
 
     }
