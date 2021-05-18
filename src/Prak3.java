@@ -2,8 +2,8 @@ import java.util.Arrays;
 
 public class Prak3 {
 
-    public static String checkLFSR(int initialwert){
-        int[] lfsr = new int[64];
+    public static void checkLFSR(int initialwert){
+        int[] lfsr = new int[21];
 
         //initialwert belegen
         int counter = 0;
@@ -13,16 +13,23 @@ public class Prak3 {
             counter++;
         }
 
-        int[] ausgabeLFSR = new int[64];
+        //64 Zyklen berechnen ==> zum Vergleich
+        counter = 0;
+        while(counter < 64){
 
-        for (int ausgabeIndex = 0; ausgabeIndex < ausgabeLFSR.length; ausgabeIndex++) {
-            for (int i = lfsr.length - 1; i > 0; i--) {
-                lfsr[i] = lfsr[i - 1];
-            }
-            lfsr[0] = lfsr[21] ^ lfsr[2] ^ lfsr[0];
-            ausgabeLFSR[ausgabeIndex] = lfsr[0];
+            //Ausgabe
+            int tmpAusgabe = lfsr[0];
+            System.out.print(tmpAusgabe);
+
+            //Berechnung neues Bit
+            //Indizes lustig umrechnen wegen komischer Zaehlung
+            int nextBit = lfsr[19] ^ lfsr[0];
+
+            //verschieben mit ArrayCopy
+            System.arraycopy(lfsr, 1, lfsr, 0, lfsr.length - 1);
+
+            lfsr[lfsr.length-1] = nextBit;
+            counter++;
         }
-        System.out.println(Arrays.toString(ausgabeLFSR));
-        return "";
     }
 }
