@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Prak3 {
 
     public static void checkLFSR(int initialwert){
