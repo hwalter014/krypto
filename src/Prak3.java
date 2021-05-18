@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Prak3 {
 
     public static void checkLFSR(int initialwert) {
@@ -74,12 +76,32 @@ public class Prak3 {
     }
 
     public static void aufgabe2(){
-        int[][] sBox = {
-                {14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7,},
-                {0, 15, 7, 4, 14, 2, 13, 1, 10, 6, 12, 11, 9, 5, 3, 8,},
-                {4, 1, 14, 8, 13, 6, 2, 11, 15, 12, 9, 7, 3, 10, 5, 0,},
-                {15, 12, 8, 2, 4, 9, 1, 7, 5, 11, 3, 14, 10, 0, 6, 13,}
-        };
 
+        int[][] tabelle = new int[64][16];
+
+        for(int x = 0; x < tabelle.length; x++){
+            for (int y = 0; y < tabelle.length; y++){
+                int inputDiff =  x ^ y;
+                int outputDiff = sbox(x) ^ sbox(y);
+                tabelle[inputDiff][outputDiff]++;
+            }
+        }
+        System.out.println("Ausgabe der Tabelle: ");
+        for (int[]  result :tabelle) {
+            System.out.println(Arrays.toString(result));
+        }
+    }
+
+    public static int sbox(int input){
+        int[][] sBox = {
+                {14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7},
+                {0, 15, 7, 4, 14, 2, 13, 1, 10, 6, 12, 11, 9, 5, 3, 8},
+                {4, 1, 14, 8, 13, 6, 2, 11, 15, 12, 9, 7, 3, 10, 5, 0},
+                {15, 12, 8, 2, 4, 9, 1, 7, 5, 11, 3, 14, 10, 0, 6, 13}
+        };
+        //lustiges shiften - passt schon
+        int spalte = (input & 1) | (((input>>5) & 1)<<1);
+        int zeile = (input >> 1) & 0b1111;
+        return sBox[spalte][zeile];
     }
 }
