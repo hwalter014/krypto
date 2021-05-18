@@ -72,12 +72,16 @@ public class Praktikum {
         //Prak2.aufgabe2Ansatz2();
 
 
-        //Aufgabe3
+        //Praktikum3
         //Aufgabe1 a)
         Prak3.checkLFSR(0x1FFFFF);
 
-        //Aufgabe2 b)
+        //Aufgabe1 b)
         System.out.println(Prak3.maxPeriode());
+        //Wiederholung nach 2097151 Iterationen
+
+        //Aufgabe 2
+
 
 
     }
