@@ -77,8 +77,7 @@ public class Praktikum {
         Prak3.checkLFSR(0x1FFFFF);
 
         //Aufgabe1 b)
-        //System.out.println(Prak3.maxPeriode());
-        System.out.println("Berechnung Aufgabe 1b) wird uebersprungen");
+        System.out.println(Prak3.maxPeriode());
         //Wiederholung nach 2097151 Iterationen
 
         //Aufgabe 2
