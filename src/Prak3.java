@@ -100,8 +100,8 @@ public class Prak3 {
                 {15, 12, 8, 2, 4, 9, 1, 7, 5, 11, 3, 14, 10, 0, 6, 13}
         };
         //lustiges shiften - passt schon
-        int spalte = (input & 1) | (((input>>5) & 1)<<1);
-        int zeile = (input >> 1) & 0b1111;
-        return sBox[spalte][zeile];
+        int zeile = (input & 0b1) | (((input>>5) & 0b1)<<1);
+        int spalte = (input >> 1) & 0b1111;
+        return sBox[zeile][spalte];
     }
 }
