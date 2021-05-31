@@ -11,7 +11,6 @@ public class Prak4 {
 
     private static final Integer[] input     = {0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34};
     private static final Integer[] cipherKey = {0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c};
-    private static final Integer[] iV        = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f};
 
     private static final byte[] realKey = integerToByte(cipherKey);
     private static final byte[] realInput = integerToByte(input);
@@ -48,6 +47,7 @@ public class Prak4 {
     public static void aufgabe2(){
 
         String chiffratPath = "text/Praktikum04/chiffrat_AES.bin";
+        final Integer[] iV  = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f};
 
         try{
             //Array deklarieren fuer PDF Datei
@@ -60,7 +60,7 @@ public class Prak4 {
             byte[] chiffrat = new BufferedInputStream(new FileInputStream(chiffratPath)).readAllBytes();
 
             //Schluessel definieren
-            byte[] realKey = {0x00, 0x00, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
+            byte[] schluessel = {0x00, 0x00, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
 
             //boolean als Abbruch Kriterium
             boolean quit = false;
@@ -70,14 +70,16 @@ public class Prak4 {
                 for(int j = 0; j < 256; j++){
 
                     //Bits schreiben
-                    realKey[0] =  Integer.valueOf(i).byteValue();
-                    realKey[1] =  Integer.valueOf(j).byteValue();
+                    schluessel[0] =  Integer.valueOf(i).byteValue();
+                    schluessel[1] =  Integer.valueOf(j).byteValue();
 
-                    SecretKeySpec secretKey = new SecretKeySpec(realKey, "AES");
+                    SecretKeySpec secretKey = new SecretKeySpec(schluessel, "AES");
                     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 
+                    //Initialisierungsvektor
                     IvParameterSpec ivParameterSpec = new IvParameterSpec(initialVektor);
 
+                    //entschluesselung
                     cipher.init(Cipher.DECRYPT_MODE, secretKey, ivParameterSpec);
 
                     original = cipher.doFinal(chiffrat);
@@ -97,7 +99,6 @@ public class Prak4 {
             }
 
             //schreiben der PDF Datei muss noch implementiert werden
-
 
         }catch(Exception e){
             e.printStackTrace();
