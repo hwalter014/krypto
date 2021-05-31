@@ -1,8 +1,6 @@
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 
-import java.util.Arrays;
-
 import static javax.crypto.Cipher.ENCRYPT_MODE;
 
 public class Prak4 {
@@ -13,16 +11,8 @@ public class Prak4 {
 
         //Enryption
         try{
-
-            byte[] realKey = new byte[16];
-            for(int i  = 0; i < realKey.length ; i++){
-                realKey[i] = cipherKey[i].byteValue();
-            }
-
-            byte[] realInput = new byte[16];
-            for(int i  = 0; i < realInput.length ; i++){
-                realInput[i] = input[i].byteValue();
-            }
+            byte[] realKey = integerToByte(cipherKey);
+            byte[] realInput = integerToByte(input);
 
             SecretKey secretKey = new SecretKeySpec(realKey, "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
@@ -38,4 +28,13 @@ public class Prak4 {
             e.printStackTrace();
         }
     }
+
+    private static byte[] integerToByte(Integer[] field){
+        byte[] result = new byte[field.length];
+        for(int i  = 0; i < result.length ; i++){
+            result[i] = field[i].byteValue();
+        }
+        return result;
+    }
+
 }
