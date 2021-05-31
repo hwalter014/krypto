@@ -74,15 +74,20 @@ public class Praktikum {
 
         //Praktikum3
         //Aufgabe1 a)
-        Prak3.checkLFSR(0x1FFFFF);
+        //Prak3.checkLFSR(0x1FFFFF);
 
         //Aufgabe1 b)
-        System.out.println(Prak3.maxPeriode());
+        //System.out.println(Prak3.maxPeriode());
         //Wiederholung nach 2097151 Iterationen
 
         //Aufgabe 2
-        Prak3.aufgabe2();
+        //Prak3.aufgabe2();
 
+        //Praktikum 4
 
+        //Aufgabe 1
+        //Testen einer Implementierung von AES
+        //Input: 32 43 f6 a8 88 5a 30 8d 31 31 98 a2 e0 37 07 34
+        //Cipher Key: 2b 7e 15 16 28 ae d2 a6 ab f7 15 88 09 cf 4f 3c
     }
 }
