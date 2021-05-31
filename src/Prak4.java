@@ -37,4 +37,8 @@ public class Prak4 {
         return result;
     }
 
+
+    public static void aufgabe2(){
+
+    }
 }
