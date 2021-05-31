@@ -50,29 +50,44 @@ public class Prak4 {
         String chiffratPath = "text/Praktikum04/chiffrat_AES.bin";
 
         try{
+            //Array deklarieren fuer PDF Datei
             byte[] original;
+
+            //Initialvektor definieren
             byte[] initialVektor = integerToByte(iV);
+
+            //chiffrat einlesen
             byte[] chiffrat = new BufferedInputStream(new FileInputStream(chiffratPath)).readAllBytes();
+
+            //Schluessel definieren
             byte[] realKey = {0x00, 0x00, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
+
+            //boolean als Abbruch Kriterium
             boolean quit = false;
 
+            //Brute Force über die ersten beiden Byte
             for (int i = 0; i < 256; i++) {
                 for(int j = 0; j < 256; j++){
+
+                    //Bits schreiben
                     realKey[0] =  Integer.valueOf(i).byteValue();
                     realKey[1] =  Integer.valueOf(j).byteValue();
-                    SecretKey secretKey = new SecretKeySpec(realKey, "AES");
+
+                    SecretKeySpec secretKey = new SecretKeySpec(realKey, "AES");
                     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 
-                    cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(initialVektor));
+                    IvParameterSpec ivParameterSpec = new IvParameterSpec(initialVektor);
+
+                    cipher.init(Cipher.DECRYPT_MODE, secretKey, ivParameterSpec);
 
                     original = cipher.doFinal(chiffrat);
 
-                    //Vergleich 25 50 44 46 2D PDF Datei
-                    if(original[0] == (Integer.valueOf(0x25)).byteValue() &&
-                            original[1] == (Integer.valueOf(0x50)).byteValue() &&
-                            original[2] == (Integer.valueOf(0x44)).byteValue() &&
-                            original[3] == (Integer.valueOf(0x46)).byteValue() &&
-                            original[4] == (Integer.valueOf(0x2D)).byteValue()){
+                    //Vergleich Signatur Hex: 25 50 44 46 2D PDF Datei
+                    if(     (original[0] == (Integer.valueOf(0x25)).byteValue()) &&
+                            (original[1] == (Integer.valueOf(0x50)).byteValue()) &&
+                            (original[2] == (Integer.valueOf(0x44)).byteValue()) &&
+                            (original[3] == (Integer.valueOf(0x46)).byteValue()) &&
+                            (original[4] == (Integer.valueOf(0x2D)).byteValue()) ){
                         System.out.println("Es wurde eine Loesung gefunden!");
                         quit = true;
                         break;
