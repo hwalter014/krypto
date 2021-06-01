@@ -121,6 +121,7 @@ public class Prak4 {
             }
             System.out.println("Es wurden " + keycounter + " Schluessel ausprobiert.");
 
+            //Datei schreiben
             FileWriter writer = new FileWriter("text/Praktikum04/output.pdf");
             for(byte plain : klarText){
                 writer.write(plain);
