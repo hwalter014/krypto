@@ -4,6 +4,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.security.Security;
 import java.util.Arrays;
 
 import static javax.crypto.Cipher.ENCRYPT_MODE;
@@ -50,10 +52,10 @@ public class Prak4 {
 
         final String chiffratPath = "text/Praktikum04/chiffrat_AES.bin";
         final Integer[] iV = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f};
-
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
         try {
             //Array deklarieren fuer PDF Datei
-            byte[] klarText;
+            byte[] klarText = new byte[0];
 
             //Initialvektor definieren
             byte[] initByteVektor = integerToByte(iV);
@@ -79,8 +81,11 @@ public class Prak4 {
                     schluessel[0] = Integer.valueOf(ersterByte).byteValue();
                     schluessel[1] = Integer.valueOf(zweiterByte).byteValue();
 
+                    schluessel[0] = (byte) -101;
+                    schluessel[1] = (byte) -26;
+
                     SecretKeySpec secretKey = new SecretKeySpec(schluessel, "AES");
-                    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                    Cipher cipher = Cipher.getInstance("AES/CBC/ISO7816-4Padding");
 
                     //entschluesselung
                     cipher.init(Cipher.DECRYPT_MODE, secretKey, initVektor);
@@ -112,7 +117,12 @@ public class Prak4 {
                 if (quit) break;
             }
             System.out.println("Es wurden " + keycounter + " Schluessel ausprobiert.");
-            //schreiben der PDF Datei muss noch implementiert werden
+
+            FileWriter writer = new FileWriter("text/Praktikum04/output.pdf");
+            for(byte plain : klarText){
+                writer.write(plain);
+            }
+            writer.close();
 
         } catch (Exception e) {
             e.printStackTrace();
