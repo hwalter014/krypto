@@ -31,6 +31,7 @@ public class Prak4 {
             for (byte blark : result) {
                 System.out.print(String.format("%x", blark) + " , ");
             }
+            System.out.println();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,7 +48,7 @@ public class Prak4 {
 
     public static void aufgabe2() {
 
-        String chiffratPath = "text/Praktikum04/chiffrat_AES.bin";
+        final String chiffratPath = "text/Praktikum04/chiffrat_AES.bin";
         final Integer[] iV = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f};
 
         try {
@@ -56,6 +57,7 @@ public class Prak4 {
 
             //Initialvektor definieren
             byte[] initByteVektor = integerToByte(iV);
+            IvParameterSpec initVektor = new IvParameterSpec(initByteVektor);
 
             //chiffrat einlesen
             byte[] chiffrat = new BufferedInputStream(new FileInputStream(chiffratPath)).readAllBytes();
@@ -65,6 +67,9 @@ public class Prak4 {
 
             //boolean als Abbruch Kriterium
             boolean quit = false;
+
+            //KeyCounter für Schluesel die keine Exception werfen
+            int keycounter = 0;
 
             //Brute Force über die ersten beiden Byte
             for (int ersterByte = 0; ersterByte < 256; ersterByte++) {
@@ -77,22 +82,20 @@ public class Prak4 {
                     SecretKeySpec secretKey = new SecretKeySpec(schluessel, "AES");
                     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 
-                    //Initialisierungsvektor
-                    IvParameterSpec initVektor = new IvParameterSpec(initByteVektor);
-
                     //entschluesselung
                     cipher.init(Cipher.DECRYPT_MODE, secretKey, initVektor);
 
                     try {
 
                         klarText = cipher.doFinal(chiffrat);
-
-                        //Vergleich Signatur Hex: 25 50 44 46 2D PDF Datei
+                        keycounter++;
+                        //Vergleich Signatur Hex: 25 50 44 46 (2D) PDF Datei
                         if ((klarText[0] == (Integer.valueOf(0x25)).byteValue()) &&
                                 (klarText[1] == (Integer.valueOf(0x50)).byteValue()) &&
                                 (klarText[2] == (Integer.valueOf(0x44)).byteValue()) &&
-                                (klarText[3] == (Integer.valueOf(0x46)).byteValue()) &&
-                                (klarText[4] == (Integer.valueOf(0x2D)).byteValue())) {
+                                (klarText[3] == (Integer.valueOf(0x46)).byteValue())) {
+                            // &&
+                            //                                (klarText[4] == (Integer.valueOf(0x2D)).byteValue())
                             System.out.println("Es wurde eine Loesung gefunden!");
                             System.out.println("Folgender Key hat zu einer Entschluesselung gefuehrt: ");
                             System.out.print(Arrays.toString(schluessel));
@@ -100,13 +103,14 @@ public class Prak4 {
                             break;
                         }
                     }catch (BadPaddingException badPaddingException){
-                        cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                        continue;
+                        //cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
                     }
 
                 }
                 if (quit) break;
             }
-
+            System.out.println("Es wurden " + keycounter + " Schluessel ausprobiert.");
             //schreiben der PDF Datei muss noch implementiert werden
 
         } catch (Exception e) {
