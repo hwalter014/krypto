@@ -86,8 +86,10 @@ public class Prak4 {
                     cipher.init(Cipher.DECRYPT_MODE, secretKey, initVektor);
 
                     try {
-
+                        //entschluesseln
                         klarText = cipher.doFinal(chiffrat);
+
+                        //keycounter erhoehen fuer Keys ohne Exception
                         keycounter++;
                         //Vergleich Signatur Hex: 25 50 44 46 (2D) PDF Datei
                         if ((klarText[0] == (Integer.valueOf(0x25)).byteValue()) &&
@@ -95,7 +97,7 @@ public class Prak4 {
                                 (klarText[2] == (Integer.valueOf(0x44)).byteValue()) &&
                                 (klarText[3] == (Integer.valueOf(0x46)).byteValue())) {
                             // &&
-                            //                                (klarText[4] == (Integer.valueOf(0x2D)).byteValue())
+                            // (klarText[4] == (Integer.valueOf(0x2D)).byteValue())
                             System.out.println("Es wurde eine Loesung gefunden!");
                             System.out.println("Folgender Key hat zu einer Entschluesselung gefuehrt: ");
                             System.out.print(Arrays.toString(schluessel));
@@ -103,7 +105,6 @@ public class Prak4 {
                             break;
                         }
                     }catch (BadPaddingException badPaddingException){
-                        continue;
                         //cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
                     }
 
