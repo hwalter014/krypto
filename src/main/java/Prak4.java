@@ -6,7 +6,6 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.security.Security;
-import java.util.Arrays;
 
 import static javax.crypto.Cipher.ENCRYPT_MODE;
 
