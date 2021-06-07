@@ -31,7 +31,7 @@ public class Prak4 {
 
             System.out.println("Die AES Verschlüsselung sieht wie folgt aus: ");
             for (byte blark : result) {
-                System.out.print(String.format("%x", blark) + " , ");
+                System.out.printf("%2x ", blark );
             }
             System.out.println();
         } catch (Exception e) {
@@ -46,7 +46,6 @@ public class Prak4 {
         }
         return result;
     }
-
 
     public static void aufgabe2() {
 
@@ -72,9 +71,6 @@ public class Prak4 {
             //boolean als Abbruch Kriterium
             boolean quit = false;
 
-            //KeyCounter für Schluesel die keine Exception werfen
-            int keycounter = 0;
-
             //Brute Force über die ersten beiden Byte
             for (int ersterByte = 0; ersterByte < 256; ersterByte++) {
                 for (int zweiterByte = 0; zweiterByte < 256; zweiterByte++) {
@@ -98,8 +94,6 @@ public class Prak4 {
                         //entschluesseln
                         klarText = cipher.doFinal(chiffrat);
 
-                        //keycounter erhoehen fuer Keys ohne Exception
-                        keycounter++;
                         //Vergleich Signatur Hex: 25 50 44 46 (2D) PDF Datei
                         if ((klarText[0] == (Integer.valueOf(0x25)).byteValue()) &&
                                 (klarText[1] == (Integer.valueOf(0x50)).byteValue()) &&
@@ -108,18 +102,18 @@ public class Prak4 {
                                 (klarText[4] == (Integer.valueOf(0x2D)).byteValue())) {
                             System.out.println("Es wurde eine Loesung gefunden!");
                             System.out.println("Folgender Key hat zu einer Entschluesselung gefuehrt: ");
-                            System.out.print(Arrays.toString(schluessel));
+                            for(byte key : schluessel){
+                                System.out.printf("%x ", key);
+                            }
                             quit = true;
                             break;
                         }
                     }catch (BadPaddingException badPaddingException){
                         //do nothing --> continue
                     }
-
                 }
                 if (quit) break;
             }
-            System.out.println("Es wurden " + keycounter + " Schluessel ausprobiert.");
 
             //Datei schreiben
             FileWriter writer = new FileWriter("text/Praktikum04/output.pdf");

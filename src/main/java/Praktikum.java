@@ -97,5 +97,7 @@ public class Praktikum {
         //zu entschlüsselne Datei ist vermutlich pdf Datei
         //pdf Datei vermutich Signatur: 25 50 44 46 2D
         Prak4.aufgabe2();
+
+        //Key der zur Entschluesselung geführt hat: 9b e6 55 55 55 55 55 55 55 55 55 55 55 55 55 55
     }
 }
