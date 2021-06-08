@@ -4,6 +4,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.security.Security;
 
@@ -51,7 +52,7 @@ public class Prak4 {
         final String chiffratPath = "text/Praktikum04/chiffrat_AES.bin";
         final Integer[] iV = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f};
 
-        //setzen der Dinger von Bouncy Castle fuer Security
+        //setzen von Bouncy Castle fuer Security
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
         try {
             //Array deklarieren fuer PDF Datei
@@ -115,11 +116,8 @@ public class Prak4 {
             }
 
             //Datei schreiben
-            FileWriter writer = new FileWriter("text/Praktikum04/output.pdf");
-            for(byte plain : klarText){
-                writer.write(plain);
-            }
-            writer.close();
+            FileOutputStream writ = new FileOutputStream("text/Praktikum04/output.pdf");
+            writ.write(klarText);
 
         } catch (Exception e) {
             e.printStackTrace();
