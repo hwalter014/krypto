@@ -1,3 +1,5 @@
+import java.security.Security;
+
 public class Praktikum {
     public static void main(String[] args) {
 
@@ -102,6 +104,7 @@ public class Praktikum {
 
 
         //Praktikum 05
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 
 
         //Aufgabe1

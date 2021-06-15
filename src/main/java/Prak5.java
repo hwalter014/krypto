@@ -1,4 +1,7 @@
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 import java.math.BigInteger;
+import java.security.Security;
 import java.util.Random;
 
 public class Prak5 {
@@ -61,4 +64,20 @@ public class Prak5 {
         return summe / val.length;
     }
 
+
+    public static void aufgabe1b(){
+
+        BigInteger p = new BigInteger("1234");
+        BigInteger q = new BigInteger("4711");
+
+        BigInteger n = p.multiply(q);
+
+        BigInteger phi = (p.subtract(new BigInteger("1"))).multiply(q.subtract(new BigInteger("1")));
+
+        Integer e = (int) Math.pow(2f, 16f) + 1;
+
+        Integer d;
+
+
+    }
 }
