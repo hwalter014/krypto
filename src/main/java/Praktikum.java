@@ -99,5 +99,14 @@ public class Praktikum {
         Prak4.aufgabe2();
 
         //Key der zur Entschluesselung geführt hat: 9b e6 55 55 55 55 55 55 55 55 55 55 55 55 55 55
+
+
+        //Praktikum 05
+
+
+        //Aufgabe1
+
+        //Teilaufgabe a)
+        //Implementierung 1500 Bit Primzahl egmäß BSI/NIST und Zeit messen
     }
 }
