@@ -114,11 +114,24 @@ public class Praktikum {
         Prak5.aufgabe1a(5);
 
         //Teilaufgabe b)
-        Prak5.aufgabe1b();
+        //Prak5.aufgabe1b();
         //Implementierung ist noch nicht richtig und läuft auch nicht
 
         //Teilaufgabe c)
         //Prüfen ob das RSA System läuft
+        Prak5.aufgabe1c();
 
+
+        //Aufgabe 2
+
+        //Aufgabe a)
+        //Implementierung Chinesischer Restsatz
+        //und verifizierung der Implementierungen aus Aufgabe C1
+
+
+        //Aufgabe b)
+        //Performancevergleich mit dem Chinesichen Restsatz
+        //Zeitmessung durch Systemzeit
+        //inklusie Vorberechnung des chinesischen Restsatzes, welche nicht betrachtet werden
     }
 }

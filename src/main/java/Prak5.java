@@ -123,7 +123,7 @@ public class Prak5 {
         }
     }
 
-    public static void aufgabe2c(){
+    public static void aufgabe1c(){
 
         String x = "4711";
         KeyPairGenerator keyPairGenerator;
@@ -165,7 +165,12 @@ public class Prak5 {
             System.out.println(decryptedMessage);
 
         }catch (Exception e){
-
+            e.printStackTrace();
         }
+    }
+
+
+    public static void aufgabe2a(){
+
     }
 }
