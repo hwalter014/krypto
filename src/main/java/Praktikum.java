@@ -127,12 +127,12 @@ public class Praktikum {
         //Aufgabe a)
         //Implementierung Chinesischer Restsatz
         //und verifizierung der Implementierungen aus Aufgabe C1
+        Prak5.aufgabe2a();
 
 
         //Aufgabe b)
         //Performancevergleich mit dem Chinesichen Restsatz
         //Zeitmessung durch Systemzeit
         //inklusie Vorberechnung des chinesischen Restsatzes, welche nicht betrachtet werden
-        //Prak5.aufgabe2a();
     }
 }

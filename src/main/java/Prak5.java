@@ -120,7 +120,6 @@ public class Prak5 {
 
     }
 
-
     public static void aufgabe2a(){
         //Zahlen muessen noch gesetzt werden
         BigInteger p = new BigInteger("13");
