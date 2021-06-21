@@ -1,7 +1,4 @@
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
 import java.math.BigInteger;
-import java.security.Security;
 import java.util.Random;
 
 public class Prak5 {
@@ -67,17 +64,48 @@ public class Prak5 {
 
     public static void aufgabe1b(){
 
-        BigInteger p = new BigInteger("1234");
-        BigInteger q = new BigInteger("4711");
+        boolean primGueltig = false;
+        int bitlaenge = 3000;
+
+        BigInteger obereGrenze = new BigInteger("2");
+        BigInteger p = new BigInteger("0");
+        BigInteger q = new BigInteger("0");
+
+        while (!primGueltig){
+
+            p = BigInteger.probablePrime(bitlaenge/2, new Random());
+            q = BigInteger.probablePrime(bitlaenge/2, new Random());
+
+            //pruefen ob Primzahlen im Intervall liegen
+            primGueltig = (p.subtract(q).compareTo(obereGrenze.pow(bitlaenge / 2).divide(new BigInteger("2").sqrt())) >= 0)
+                    && (p.subtract(q).compareTo(obereGrenze.pow(bitlaenge / 2)) <= 0);
+        }
+
 
         BigInteger n = p.multiply(q);
 
-        BigInteger phi = (p.subtract(new BigInteger("1"))).multiply(q.subtract(new BigInteger("1")));
+        BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
 
-        Integer e = (int) Math.pow(2f, 16f) + 1;
+        BigInteger e = new BigInteger("2").pow(16).add(BigInteger.ONE);
 
-        Integer d;
+        BigInteger d = gcd(e, phi);
+        BigInteger f = e.modInverse(phi);
+
+        //Ausgabe der Werte
+
+        System.out.println("der öffentliche Key n ist: " + n);
+        System.out.println("der private Key d ist: " + d);
+        System.out.println("der öffentliche Wert e ist: " + e);
+        System.out.println("der Wert phi ist: " + phi);
+
+    }
 
 
+    // extended Euclidean Algorithm
+    private static BigInteger gcd(BigInteger a, BigInteger b){
+        if (a.compareTo(new BigInteger("0")) == 0)
+            return b;
+
+        return gcd(b.mod(a), a);
     }
 }

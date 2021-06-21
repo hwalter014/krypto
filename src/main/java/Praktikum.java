@@ -111,6 +111,9 @@ public class Praktikum {
 
         //Teilaufgabe a)
         //Implementierung 1500 Bit Primzahl egmäß BSI/NIST und Zeit messen
-        Prak5.aufgabe1a(30);
+        Prak5.aufgabe1a(5);
+
+        //Teilaufgabe b)
+        Prak5.aufgabe1b();
     }
 }
