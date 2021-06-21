@@ -2,9 +2,14 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.security.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Prak5 {
+
+    private static BigInteger Q;
+    private static BigInteger P;
 
     public static void aufgabe1a(int anzahlWdhl) {
 
@@ -73,14 +78,12 @@ public class Prak5 {
         BigInteger p = null;
         BigInteger q = null;
 
-        BigInteger valueTwo = new BigInteger("2");
-
         //Grenzen berechnen
         //intervall des BSI
         BigDecimal uGrenze = BigDecimal.valueOf(2).pow(bitlaenge/2);
         uGrenze = uGrenze.divide(BigDecimal.valueOf(Math.sqrt(2)), 2,RoundingMode.HALF_UP);
 
-        BigInteger oGrenze = valueTwo.pow(bitlaenge/2);
+        BigInteger oGrenze = BigInteger.TWO.pow(bitlaenge/2);
 
         while (!primeGueltig){
             p = BigInteger.probablePrime(1500, new Random());
@@ -98,7 +101,7 @@ public class Prak5 {
         BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
 
         //Wert e wird fest gesetzt
-        BigInteger e = valueTwo.pow(16).add(BigInteger.ONE);
+        BigInteger e = BigInteger.TWO.pow(16).add(BigInteger.ONE);
 
         BigInteger d = e.modInverse(phi);
 
@@ -118,6 +121,11 @@ public class Prak5 {
         System.out.println("Die Entschluesselung sieht wie folgt aus.");
         System.out.println(RSAdecrypt(chiffrat, d,n));
 
+
+        //setzen der Primzahlen fuer andere Aufgabe
+        Q = q;
+        P = p;
+
     }
 
     public static void aufgabe2a(){
@@ -135,14 +143,15 @@ public class Prak5 {
         //Performancetest
 
         //RSA-System anlegen
-        String x = "Das ist ein super geheimer Test fuer die Performance";
-        KeyPairGenerator keyPairGenerator;
-        BigInteger p = BigInteger.probablePrime(1500,new Random());
-        BigInteger q = BigInteger.probablePrime(1500,new Random());
+        BigInteger x = new BigInteger("47111111111111111111");
 
+        BigInteger p = P;
+        BigInteger q = Q;
 
-        //Text zu chiffrat verschluesseln
-
+        BigInteger n = q.multiply(p);
+        BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
+        BigInteger e = BigInteger.TWO.pow(16).add(BigInteger.ONE);
+        BigInteger d = e.modInverse(phi);
 
         //Vorberechnung der Konstanten des Chinesishen Restsatzes
         BigInteger cp = q.modInverse(p);
@@ -154,22 +163,32 @@ public class Prak5 {
         //Performancetest
         int anzahlTests = 10;
 
+        long[] listeOhneCh = new long[anzahlTests];
+
+        //Verschluesselung
+        BigInteger chiffrat = RSAencrypt(x, e,n);
+
         //Test ohne chinesischer Restsatz
-        while (anzahlTests > 0){
+        for (int i = 0; i < anzahlTests; i++){
+            long startzeit = System.currentTimeMillis();
+            BigInteger decrypt = RSAdecrypt(chiffrat,d,n);
 
-
-
-            anzahlTests--;
+            listeOhneCh[i] = startzeit - System.currentTimeMillis();
         }
 
         //Test mit Chinesischer Restsatz
-        anzahlTests = 10;
-        while (anzahlTests > 0){
-
-
-
-            anzahlTests--;
+        long[] listeMitCh = new long[anzahlTests];
+        for (int i = 0; i < anzahlTests; i++){
+            long startzeit = System.currentTimeMillis();
+            BigInteger decrypt = restsatzMitVorBerechnung(p,q,chiffrat,d,qcp,pcq);
+            listeMitCh[i] = startzeit - System.currentTimeMillis();
         }
+
+        //Ausgabe der durchschnittlichen Werte
+        System.out.println("Die durchschn. Zeit ohne Restsatz war: " + getAvg(listeOhneCh));
+        System.out.println("Die durchschn. Zeit mit Restsatz war: " + getAvg(listeMitCh));
+
+
     }
 
     private static BigInteger chinesischDecrypt(BigInteger p1, BigInteger q1, BigInteger x, BigInteger d1){
@@ -179,10 +198,8 @@ public class Prak5 {
         BigInteger xp = x.mod(p1);
         BigInteger xq = x.mod(q1);
 
-        BigInteger valueOne = new BigInteger("1");
-
-        BigInteger dp = d1.mod(p1.subtract(valueOne));
-        BigInteger dq = d1.mod(q1.subtract(valueOne));
+        BigInteger dp = d1.mod(p1.subtract(BigInteger.ONE));
+        BigInteger dq = d1.mod(q1.subtract(BigInteger.ONE));
 
         //Schritt 2
         BigInteger yp = xp.pow(dp.intValue()).mod(p1);
@@ -192,6 +209,24 @@ public class Prak5 {
         BigInteger cp = q1.modInverse(p1);
         BigInteger cq = p1.modInverse(q1);
         return q1.multiply(cp).multiply(yp).add(p1.multiply(cq).multiply(yq)).mod(n);
+    }
+
+    private static BigInteger restsatzMitVorBerechnung(BigInteger p1, BigInteger q1, BigInteger x,
+                                                       BigInteger d1, BigInteger qcp, BigInteger pcq){
+        BigInteger n = p1.multiply(q1);
+
+        //Schritt1
+        BigInteger xp = x.mod(p1);
+        BigInteger xq = x.mod(q1);
+
+        BigInteger dp = d1.mod(p1.subtract(BigInteger.ONE));
+        BigInteger dq = d1.mod(q1.subtract(BigInteger.ONE));
+
+        //Schritt 2
+        BigInteger yp = xp.pow(dp.intValue()).mod(p1);
+        BigInteger yq = xq.pow(dq.intValue()).mod(q1);
+
+        return qcp.multiply(yp).add(pcq.multiply(yq)).mod(n);
     }
 
     private static BigInteger RSAencrypt(BigInteger message, BigInteger e, BigInteger n){
