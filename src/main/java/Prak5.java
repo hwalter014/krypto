@@ -1,11 +1,7 @@
-import javax.crypto.Cipher;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
-import java.nio.charset.StandardCharsets;
 import java.security.*;
-import java.util.Base64;
-import java.util.BitSet;
 import java.util.Random;
 
 public class Prak5 {
@@ -81,14 +77,10 @@ public class Prak5 {
 
         //Grenzen berechnen
         //intervall des BSI
-        //BigDecimal uGrenze = valueTwo.pow(bitlaenge/2).divide(BigDecimal.valueOf(Math.sqrt(2)), 2, RoundingMode.HALF_UP);
-
         BigDecimal uGrenze = BigDecimal.valueOf(2).pow(bitlaenge/2);
-        uGrenze = uGrenze.divide(BigDecimal.valueOf(Math.sqrt(2)), 2,
-                RoundingMode.HALF_UP);
+        uGrenze = uGrenze.divide(BigDecimal.valueOf(Math.sqrt(2)), 2,RoundingMode.HALF_UP);
 
         BigInteger oGrenze = valueTwo.pow(bitlaenge/2);
-        //Problem ist dass Grenzen die gleiche Zahl sind.
 
         while (!primeGueltig){
             p = BigInteger.probablePrime(1500, new Random());
@@ -105,6 +97,7 @@ public class Prak5 {
 
         BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
 
+        //Wert e wird fest gesetzt
         BigInteger e = valueTwo.pow(16).add(BigInteger.ONE);
 
         BigInteger d = e.modInverse(phi);
@@ -113,68 +106,18 @@ public class Prak5 {
 
         System.out.println("der öffentliche Key n ist: " + n);
         System.out.println("der private Key d ist: " + d);
-        System.out.println("der öffentliche Wert e ist: " + e);
+        System.out.println("der öffentliche Wert e ist: " + e + " wie der vom BSI kleinste empfohlene Wert");
         System.out.println("der Wert phi ist: " + phi);
 
-    }
 
-    public static void aufgabe1bAlt(){
-        KeyPairGenerator keyGen;
-        try {
-            keyGen = KeyPairGenerator.getInstance("RSA");
-            keyGen.initialize(3000);
-            KeyPair keypair = keyGen.genKeyPair();
-            PrivateKey privateKey = keypair.getPrivate();
-            PublicKey publicKey = keypair.getPublic();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-    }
+        //gleich Aufgabec hinterher, da sonst Spaß mit Variablen Sichtbarkeiten
+        BigInteger x = new BigInteger("4711");
 
-    public static void aufgabe1c(){
+        BigInteger chiffrat = RSAencrypt(x,e,n);
 
-        String x = "4711";
-        KeyPairGenerator keyPairGenerator;
-        PrivateKey privateKey = null;
-        PublicKey publicKey = null;
+        System.out.println("Die Entschluesselung sieht wie folgt aus.");
+        System.out.println(RSAdecrypt(chiffrat, d,n));
 
-        try {
-            keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(3000);
-            KeyPair keypair = keyPairGenerator.genKeyPair();
-            privateKey = keypair.getPrivate();
-            publicKey = keypair.getPublic();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        //Verschluesseln
-        try {
-            Cipher encryptCipher = Cipher.getInstance("RSA");
-            encryptCipher.init(Cipher.ENCRYPT_MODE, publicKey);
-
-            byte[] secretMessageBytes = x.getBytes(StandardCharsets.UTF_8);
-            byte[] encryptedMessageBytes = encryptCipher.doFinal(secretMessageBytes);
-            String encodedMessage = Base64.getEncoder().encodeToString(encryptedMessageBytes);
-
-            System.out.println("Verschlüsselung:");
-            System.out.println(encodedMessage);
-
-
-            //Entschluesseln
-
-            Cipher decryptCipher = Cipher.getInstance("RSA");
-            decryptCipher.init(Cipher.DECRYPT_MODE, privateKey);
-
-            byte[] decryptedMessageBytes = decryptCipher.doFinal(encryptedMessageBytes);
-            String decryptedMessage = new String(decryptedMessageBytes, StandardCharsets.UTF_8);
-
-            System.out.println("Entschlüsselt:");
-            System.out.println(decryptedMessage);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
 
@@ -230,7 +173,6 @@ public class Prak5 {
         }
     }
 
-
     private static BigInteger chinesischDecrypt(BigInteger p1, BigInteger q1, BigInteger x, BigInteger d1){
         BigInteger n = p1.multiply(q1);
 
@@ -251,5 +193,13 @@ public class Prak5 {
         BigInteger cp = q1.modInverse(p1);
         BigInteger cq = p1.modInverse(q1);
         return q1.multiply(cp).multiply(yp).add(p1.multiply(cq).multiply(yq)).mod(n);
+    }
+
+    private static BigInteger RSAencrypt(BigInteger message, BigInteger e, BigInteger n){
+        return message.pow(e.intValue()).mod(n);
+    }
+
+    private static BigInteger RSAdecrypt(BigInteger message, BigInteger d, BigInteger n){
+        return message.modPow(d,n);
     }
 }
