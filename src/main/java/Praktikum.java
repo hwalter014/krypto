@@ -115,5 +115,10 @@ public class Praktikum {
 
         //Teilaufgabe b)
         Prak5.aufgabe1b();
+        //Implementierung ist noch nicht richtig und läuft auch nicht
+
+        //Teilaufgabe c)
+        //Prüfen ob das RSA System läuft
+
     }
 }

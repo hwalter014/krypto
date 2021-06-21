@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.security.*;
 import java.util.Random;
 
 public class Prak5 {
@@ -106,12 +107,21 @@ public class Prak5 {
 
     }
 
+    public static void aufgabe1bAlternative(){
+        KeyPairGenerator keyGen;
+        try {
+            keyGen = KeyPairGenerator.getInstance("RSA");
+            keyGen.initialize(3000);
+            KeyPair keypair = keyGen.genKeyPair();
+            PrivateKey privateKey = keypair.getPrivate();
+            PublicKey publicKey = keypair.getPublic();
+            System.out.println(privateKey);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
 
-    // erweiterter Euklidischer Algorithmus
-    private static BigInteger gcd(BigInteger a, BigInteger b) {
-        if (a.compareTo(new BigInteger("0")) == 0)
-            return b;
+    public static void aufgabe2c(){
 
-        return gcd(b.mod(a), a);
     }
 }
