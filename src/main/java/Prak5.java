@@ -1,5 +1,8 @@
+import javax.crypto.Cipher;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
+import java.util.Base64;
 import java.util.Random;
 
 public class Prak5 {
@@ -107,7 +110,7 @@ public class Prak5 {
 
     }
 
-    public static void aufgabe1bAlternative(){
+    public static void aufgabe1bAlt(){
         KeyPairGenerator keyGen;
         try {
             keyGen = KeyPairGenerator.getInstance("RSA");
@@ -115,7 +118,6 @@ public class Prak5 {
             KeyPair keypair = keyGen.genKeyPair();
             PrivateKey privateKey = keypair.getPrivate();
             PublicKey publicKey = keypair.getPublic();
-            System.out.println(privateKey);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -123,5 +125,47 @@ public class Prak5 {
 
     public static void aufgabe2c(){
 
+        String x = "4711";
+        KeyPairGenerator keyPairGenerator;
+        PrivateKey privateKey = null;
+        PublicKey publicKey = null;
+
+        try {
+            keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+            keyPairGenerator.initialize(3000);
+            KeyPair keypair = keyPairGenerator.genKeyPair();
+            privateKey = keypair.getPrivate();
+            publicKey = keypair.getPublic();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        //Verschluesseln
+        try {
+            Cipher encryptCipher = Cipher.getInstance("RSA");
+            encryptCipher.init(Cipher.ENCRYPT_MODE, publicKey);
+
+            byte[] secretMessageBytes = x.getBytes(StandardCharsets.UTF_8);
+            byte[] encryptedMessageBytes = encryptCipher.doFinal(secretMessageBytes);
+            String encodedMessage = Base64.getEncoder().encodeToString(encryptedMessageBytes);
+
+            System.out.println("Verschlüsselung:");
+            System.out.println(encodedMessage);
+
+
+            //Entschluesseln
+
+            Cipher decryptCipher = Cipher.getInstance("RSA");
+            decryptCipher.init(Cipher.DECRYPT_MODE, privateKey);
+
+            byte[] decryptedMessageBytes = decryptCipher.doFinal(encryptedMessageBytes);
+            String decryptedMessage = new String(decryptedMessageBytes, StandardCharsets.UTF_8);
+
+            System.out.println("Entschlüsselt:");
+            System.out.println(decryptedMessage);
+
+        }catch (Exception e){
+
+        }
     }
 }
