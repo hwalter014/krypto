@@ -78,6 +78,7 @@ public class Prak5 {
         BigInteger valueTwo = new BigInteger("2");
 
         //Grenzen berechnen
+        //intervall des BSI
         BigInteger uGrenze = valueTwo.pow(bitlaenge/2).divide(valueTwo.sqrt());
         BigInteger oGrenze = valueTwo.pow(bitlaenge/2);
         //Problem ist dass Grenzen die gleiche Zahl sind.
