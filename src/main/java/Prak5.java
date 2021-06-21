@@ -195,23 +195,13 @@ public class Prak5 {
     }
 
     private static BigInteger chinesischDecrypt(BigInteger p1, BigInteger q1, BigInteger x, BigInteger d1){
-        BigInteger n = p1.multiply(q1);
-
-        //Schritt1
-        BigInteger xp = x.mod(p1);
-        BigInteger xq = x.mod(q1);
-
-        BigInteger dp = d1.mod(p1.subtract(BigInteger.ONE));
-        BigInteger dq = d1.mod(q1.subtract(BigInteger.ONE));
-
-        //Schritt 2
-        BigInteger yp = xp.pow(dp.intValue()).mod(p1);
-        BigInteger yq = xq.pow(dq.intValue()).mod(q1);
-
         //Schritt 3 Ruecktransformation
         BigInteger cp = q1.modInverse(p1);
         BigInteger cq = p1.modInverse(q1);
-        return q1.multiply(cp).multiply(yp).add(p1.multiply(cq).multiply(yq)).mod(n);
+
+        BigInteger qcp = q1.multiply(cp);
+        BigInteger pcq = p1.multiply(cq);
+        return restsatzMitVorBerechnung(p1,q1,x,d1,qcp,pcq);
     }
 
     private static BigInteger restsatzMitVorBerechnung(BigInteger p1, BigInteger q1, BigInteger x,
