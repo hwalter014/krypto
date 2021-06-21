@@ -171,6 +171,28 @@ public class Prak5 {
 
 
     public static void aufgabe2a(){
+        //Zahlen muessen noch gesetzt werden
+        BigInteger p = null;
+        BigInteger q = null;
+        BigInteger messageX = null;
+        BigInteger d = null;
+        BigInteger n = q.multiply(q);
 
+
+        //Schritt1
+        BigInteger xp = messageX.mod(p);
+        BigInteger xq = messageX.mod(q);
+
+        BigInteger dp = d.mod(p.subtract(new BigInteger("1")));
+        BigInteger dq = d.mod(q.subtract(new BigInteger("1")));
+
+        //Schritt 2
+        BigInteger yp = xp.pow(dp.intValue()).mod(p);
+        BigInteger yq = xq.pow(dq.intValue()).mod(p);
+
+        //Schritt 3 Ruecktransformation
+        BigInteger cp = q.modInverse(p);
+        BigInteger cq = p.modInverse(q);
+        BigInteger y = q.multiply(cp).multiply(yp).add(p.multiply(cq).multiply(yq).mod(n));
     }
 }
