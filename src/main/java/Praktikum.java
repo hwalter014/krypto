@@ -134,5 +134,6 @@ public class Praktikum {
         //Performancevergleich mit dem Chinesichen Restsatz
         //Zeitmessung durch Systemzeit
         //inklusie Vorberechnung des chinesischen Restsatzes, welche nicht betrachtet werden
+        Prak5.aufgabe2b();
     }
 }

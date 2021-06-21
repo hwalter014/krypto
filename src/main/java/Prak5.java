@@ -167,22 +167,25 @@ public class Prak5 {
 
         //Verschluesselung
         BigInteger chiffrat = RSAencrypt(x, e,n);
-
+        BigInteger decrypt = null;
         //Test ohne chinesischer Restsatz
         for (int i = 0; i < anzahlTests; i++){
             long startzeit = System.currentTimeMillis();
-            BigInteger decrypt = RSAdecrypt(chiffrat,d,n);
+            decrypt = RSAdecrypt(chiffrat,d,n);
 
-            listeOhneCh[i] = startzeit - System.currentTimeMillis();
+            listeOhneCh[i] = System.currentTimeMillis() - startzeit;
         }
+        System.out.println("Testausgabe, ob richtig entschlüsselt wurde ohne Restsatz " + decrypt);
 
         //Test mit Chinesischer Restsatz
         long[] listeMitCh = new long[anzahlTests];
+        decrypt = null;
         for (int i = 0; i < anzahlTests; i++){
             long startzeit = System.currentTimeMillis();
-            BigInteger decrypt = restsatzMitVorBerechnung(p,q,chiffrat,d,qcp,pcq);
-            listeMitCh[i] = startzeit - System.currentTimeMillis();
+            decrypt = restsatzMitVorBerechnung(p,q,chiffrat,d,qcp,pcq);
+            listeMitCh[i] = System.currentTimeMillis() - startzeit;
         }
+        System.out.println("Testausgabe, ob richtig entschlüsselt wurde mit Restsatz " + decrypt);
 
         //Ausgabe der durchschnittlichen Werte
         System.out.println("Die durchschn. Zeit ohne Restsatz war: " + getAvg(listeOhneCh));
@@ -223,8 +226,8 @@ public class Prak5 {
         BigInteger dq = d1.mod(q1.subtract(BigInteger.ONE));
 
         //Schritt 2
-        BigInteger yp = xp.pow(dp.intValue()).mod(p1);
-        BigInteger yq = xq.pow(dq.intValue()).mod(q1);
+        BigInteger yp = xp.modPow(dp,p1);
+        BigInteger yq = xq.modPow(dq,q1);
 
         return qcp.multiply(yp).add(pcq.multiply(yq)).mod(n);
     }
