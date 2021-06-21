@@ -111,7 +111,7 @@ public class Praktikum {
 
         //Teilaufgabe a)
         //Implementierung 1500 Bit Primzahl egmäß BSI/NIST und Zeit messen
-        Prak5.aufgabe1a(5);
+        //Prak5.aufgabe1a(5);
 
         //Teilaufgabe b)
         //Prak5.aufgabe1b();
@@ -119,7 +119,7 @@ public class Praktikum {
 
         //Teilaufgabe c)
         //Prüfen ob das RSA System läuft
-        Prak5.aufgabe1c();
+        //Prak5.aufgabe1c();
 
 
         //Aufgabe 2
@@ -133,5 +133,6 @@ public class Praktikum {
         //Performancevergleich mit dem Chinesichen Restsatz
         //Zeitmessung durch Systemzeit
         //inklusie Vorberechnung des chinesischen Restsatzes, welche nicht betrachtet werden
+        Prak5.aufgabe2a();
     }
 }

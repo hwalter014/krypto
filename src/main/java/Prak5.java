@@ -3,6 +3,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.Base64;
+import java.util.BitSet;
 import java.util.Random;
 
 public class Prak5 {
@@ -172,27 +173,30 @@ public class Prak5 {
 
     public static void aufgabe2a(){
         //Zahlen muessen noch gesetzt werden
-        BigInteger p = null;
-        BigInteger q = null;
-        BigInteger messageX = null;
-        BigInteger d = null;
-        BigInteger n = q.multiply(q);
+        BigInteger p = new BigInteger("13");
+        BigInteger q = new BigInteger("17");
+        BigInteger messageX = new BigInteger("30");
+        BigInteger d = new BigInteger("55");
+        BigInteger n = p.multiply(q);
 
 
         //Schritt1
         BigInteger xp = messageX.mod(p);
         BigInteger xq = messageX.mod(q);
 
-        BigInteger dp = d.mod(p.subtract(new BigInteger("1")));
-        BigInteger dq = d.mod(q.subtract(new BigInteger("1")));
+        BigInteger valueOne = new BigInteger("1");
+
+        BigInteger dp = d.mod(p.subtract(valueOne));
+        BigInteger dq = d.mod(q.subtract(valueOne));
 
         //Schritt 2
         BigInteger yp = xp.pow(dp.intValue()).mod(p);
-        BigInteger yq = xq.pow(dq.intValue()).mod(p);
+        BigInteger yq = xq.pow(dq.intValue()).mod(q);
 
         //Schritt 3 Ruecktransformation
         BigInteger cp = q.modInverse(p);
         BigInteger cq = p.modInverse(q);
-        BigInteger y = q.multiply(cp).multiply(yp).add(p.multiply(cq).multiply(yq).mod(n));
+        BigInteger y = q.multiply(cp).multiply(yp).add(p.multiply(cq).multiply(yq)).mod(n);
+        System.out.println(y);
     }
 }
