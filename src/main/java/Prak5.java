@@ -178,26 +178,54 @@ public class Prak5 {
         BigInteger q = new BigInteger("17");
         BigInteger messageX = new BigInteger("30");
         BigInteger d = new BigInteger("55");
-        BigInteger n = p.multiply(q);
 
+        BigInteger result = chinesischDecrypt(p,q,messageX,d);
+        System.out.println(result);
+    }
+
+    public static void aufgabe2b(){
+        //Performancetest
+
+        //RSA-System anlegen
+        String x = "Das ist ein super geheimer Test fuer die Performance";
+        KeyPairGenerator keyPairGenerator;
+        BigInteger p = BigInteger.probablePrime(1500,new Random());
+        BigInteger q = BigInteger.probablePrime(1500,new Random());
+
+
+
+        //Vorberechnung der Konstanten des Chinesishen Restsatzes
+        BigInteger cp = q.modInverse(p);
+        BigInteger cq = p.modInverse(q);
+        BigInteger qcp = q.multiply(cp);
+        BigInteger pcq = p.multiply(cq);
+
+
+        //Performancetest
+
+
+    }
+
+
+    private static BigInteger chinesischDecrypt(BigInteger p1, BigInteger q1, BigInteger x, BigInteger d1){
+        BigInteger n = p1.multiply(q1);
 
         //Schritt1
-        BigInteger xp = messageX.mod(p);
-        BigInteger xq = messageX.mod(q);
+        BigInteger xp = x.mod(p1);
+        BigInteger xq = x.mod(q1);
 
         BigInteger valueOne = new BigInteger("1");
 
-        BigInteger dp = d.mod(p.subtract(valueOne));
-        BigInteger dq = d.mod(q.subtract(valueOne));
+        BigInteger dp = d1.mod(p1.subtract(valueOne));
+        BigInteger dq = d1.mod(q1.subtract(valueOne));
 
         //Schritt 2
-        BigInteger yp = xp.pow(dp.intValue()).mod(p);
-        BigInteger yq = xq.pow(dq.intValue()).mod(q);
+        BigInteger yp = xp.pow(dp.intValue()).mod(p1);
+        BigInteger yq = xq.pow(dq.intValue()).mod(q1);
 
         //Schritt 3 Ruecktransformation
-        BigInteger cp = q.modInverse(p);
-        BigInteger cq = p.modInverse(q);
-        BigInteger y = q.multiply(cp).multiply(yp).add(p.multiply(cq).multiply(yq)).mod(n);
-        System.out.println(y);
+        BigInteger cp = q1.modInverse(p1);
+        BigInteger cq = p1.modInverse(q1);
+        return q1.multiply(cp).multiply(yp).add(p1.multiply(cq).multiply(yq)).mod(n);
     }
 }
