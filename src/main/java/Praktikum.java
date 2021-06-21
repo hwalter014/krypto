@@ -114,7 +114,7 @@ public class Praktikum {
         //Prak5.aufgabe1a(5);
 
         //Teilaufgabe b)
-        //Prak5.aufgabe1b();
+        Prak5.aufgabe1b();
         //Implementierung ist noch nicht richtig und läuft auch nicht
 
         //Teilaufgabe c)
@@ -133,6 +133,6 @@ public class Praktikum {
         //Performancevergleich mit dem Chinesichen Restsatz
         //Zeitmessung durch Systemzeit
         //inklusie Vorberechnung des chinesischen Restsatzes, welche nicht betrachtet werden
-        Prak5.aufgabe2a();
+        //Prak5.aufgabe2a();
     }
 }

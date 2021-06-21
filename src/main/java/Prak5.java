@@ -1,5 +1,7 @@
 import javax.crypto.Cipher;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.Base64;
@@ -79,16 +81,21 @@ public class Prak5 {
 
         //Grenzen berechnen
         //intervall des BSI
-        BigInteger uGrenze = valueTwo.pow(bitlaenge/2).divide(valueTwo.sqrt());
+        //BigDecimal uGrenze = valueTwo.pow(bitlaenge/2).divide(BigDecimal.valueOf(Math.sqrt(2)), 2, RoundingMode.HALF_UP);
+
+        BigDecimal uGrenze = BigDecimal.valueOf(2).pow(bitlaenge/2);
+        uGrenze = uGrenze.divide(BigDecimal.valueOf(Math.sqrt(2)), 2,
+                RoundingMode.HALF_UP);
+
         BigInteger oGrenze = valueTwo.pow(bitlaenge/2);
         //Problem ist dass Grenzen die gleiche Zahl sind.
 
         while (!primeGueltig){
-            p = BigInteger.probablePrime(new Random().ints(1000,1500).findFirst().getAsInt(), new Random());
-            q = BigInteger.probablePrime(new Random().ints(1000,1500).findFirst().getAsInt(), new Random());
+            p = BigInteger.probablePrime(1500, new Random());
+            q = BigInteger.probablePrime(1500, new Random());
 
-            if(p.compareTo(uGrenze) > 0 && p.compareTo(oGrenze) < 0){
-                if (q.compareTo(uGrenze) > 0 && q.compareTo(oGrenze) < 0){
+            if(p.compareTo(uGrenze.toBigInteger()) > 0 && p.compareTo(oGrenze) < 0){
+                if (q.compareTo(uGrenze.toBigInteger()) > 0 && q.compareTo(oGrenze) < 0){
                     primeGueltig = true;
                 }
             }
@@ -100,8 +107,7 @@ public class Prak5 {
 
         BigInteger e = valueTwo.pow(16).add(BigInteger.ONE);
 
-        BigInteger d = e.gcd(phi);
-        BigInteger f = e.modInverse(phi);
+        BigInteger d = e.modInverse(phi);
 
         //Ausgabe der Werte
 
@@ -193,6 +199,8 @@ public class Prak5 {
         BigInteger q = BigInteger.probablePrime(1500,new Random());
 
 
+        //Text zu chiffrat verschluesseln
+
 
         //Vorberechnung der Konstanten des Chinesishen Restsatzes
         BigInteger cp = q.modInverse(p);
@@ -202,8 +210,24 @@ public class Prak5 {
 
 
         //Performancetest
+        int anzahlTests = 10;
+
+        //Test ohne chinesischer Restsatz
+        while (anzahlTests > 0){
 
 
+
+            anzahlTests--;
+        }
+
+        //Test mit Chinesischer Restsatz
+        anzahlTests = 10;
+        while (anzahlTests > 0){
+
+
+
+            anzahlTests--;
+        }
     }
 
 
