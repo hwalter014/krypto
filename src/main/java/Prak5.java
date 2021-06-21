@@ -196,7 +196,7 @@ public class Prak5 {
     }
 
     private static BigInteger RSAencrypt(BigInteger message, BigInteger e, BigInteger n){
-        return message.pow(e.intValue()).mod(n);
+        return message.modPow(e,n);
     }
 
     private static BigInteger RSAdecrypt(BigInteger message, BigInteger d, BigInteger n){
