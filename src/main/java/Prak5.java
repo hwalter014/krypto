@@ -1,9 +1,6 @@
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
-import java.security.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Prak5 {
@@ -81,7 +78,7 @@ public class Prak5 {
         //Grenzen berechnen
         //intervall des BSI
         BigDecimal uGrenze = BigDecimal.valueOf(2).pow(bitlaenge/2);
-        uGrenze = uGrenze.divide(BigDecimal.valueOf(Math.sqrt(2)), 2,RoundingMode.HALF_UP);
+        uGrenze = uGrenze.divide(BigDecimal.valueOf(Math.sqrt(2)), 2,RoundingMode.HALF_UP); //scale sind Nachkommastellen
 
         BigInteger oGrenze = BigInteger.TWO.pow(bitlaenge/2);
 
@@ -106,20 +103,23 @@ public class Prak5 {
         BigInteger d = e.modInverse(phi);
 
         //Ausgabe der Werte
-
         System.out.println("der öffentliche Key n ist: " + n);
         System.out.println("der private Key d ist: " + d);
         System.out.println("der öffentliche Wert e ist: " + e + " wie der vom BSI kleinste empfohlene Wert");
         System.out.println("der Wert phi ist: " + phi);
 
 
-        //gleich Aufgabec hinterher, da sonst Spaß mit Variablen Sichtbarkeiten
+        System.out.println("Ausgabe für die Aufgabe 1 c)");
+        //gleich Aufgabe c hinterher, da sonst Spaß mit Variablen Sichtbarkeiten
+        System.out.println("Folgende Nachricht wird verschlüsselt: 4711");
         BigInteger x = new BigInteger("4711");
 
         BigInteger chiffrat = RSAencrypt(x,e,n);
 
         System.out.println("Die Entschluesselung sieht wie folgt aus.");
         System.out.println(RSAdecrypt(chiffrat, d,n));
+
+        System.out.println("Das RSA-Kryptosystem hat funktioniert.");
 
 
         //setzen der Primzahlen fuer andere Aufgabe
@@ -195,7 +195,7 @@ public class Prak5 {
     }
 
     private static BigInteger chinesischDecrypt(BigInteger p1, BigInteger q1, BigInteger x, BigInteger d1){
-        //Schritt 3 Ruecktransformation
+        //Vorberechnungen
         BigInteger cp = q1.modInverse(p1);
         BigInteger cq = p1.modInverse(q1);
 

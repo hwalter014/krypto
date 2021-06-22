@@ -111,9 +111,11 @@ public class Praktikum {
 
         //Teilaufgabe a)
         //Implementierung 1500 Bit Primzahl egmäß BSI/NIST und Zeit messen
+        System.out.println("Ausgabe für die Aufgabe 1 a)");
         Prak5.aufgabe1a(5);
 
         //Teilaufgabe b)
+        System.out.println("\nAusgabe für die Aufgabe 1 b)");
         Prak5.aufgabe1b();
         //Implementierung ist noch nicht richtig und läuft auch nicht
 
@@ -127,6 +129,8 @@ public class Praktikum {
         //Aufgabe a)
         //Implementierung Chinesischer Restsatz
         //und verifizierung der Implementierungen aus Aufgabe C1
+        System.out.println("\nAusgabe für die Aufgabe 2 a)");
+        System.out.println("Hier wurde die Rechnung aus den Folien verifiziert.");
         Prak5.aufgabe2a();
 
 
@@ -134,6 +138,7 @@ public class Praktikum {
         //Performancevergleich mit dem Chinesichen Restsatz
         //Zeitmessung durch Systemzeit
         //inklusie Vorberechnung des chinesischen Restsatzes, welche nicht betrachtet werden
+        System.out.println("\nAusgabe für die Aufgabe 2 b)");
         Prak5.aufgabe2b();
     }
 }
