@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+//blark
 public class Prak1 {
     public static HashMap<Character, Double> relHaeufigkeitMonogramm(String chiffrat) {
         HashMap<Character, Double> dictHaeufigkeit = new HashMap<>();
